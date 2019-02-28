@@ -4,9 +4,6 @@
 [submodule "bitbake"]
 	path = bitbake
 	url = https://github.com/openembedded/bitbake.git
-[submodule "meta-odroid"]
-	path = meta-odroid
-	url = https://github.com/akuster/meta-odroid.git
 [submodule "meta-browser"]
 	path = meta-browser
 	url = https://github.com/Igalia/meta-browser.git
