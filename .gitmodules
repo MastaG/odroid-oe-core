@@ -4,9 +4,6 @@
 [submodule "bitbake"]
 	path = bitbake
 	url = https://github.com/openembedded/bitbake.git
-[submodule "meta-browser"]
-	path = meta-browser
-	url = https://github.com/Igalia/meta-browser.git
 [submodule "meta-qt5"]
 	path = meta-qt5
 	url = https://github.com/meta-qt5/meta-qt5.git
