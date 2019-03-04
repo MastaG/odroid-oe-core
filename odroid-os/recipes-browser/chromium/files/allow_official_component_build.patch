@@ -1,0 +1,15 @@
+--- chromium-72.0.3626.119/BUILD.gn.orig	2019-03-01 16:06:26.353131930 +0100
++++ chromium-72.0.3626.119/BUILD.gn	2019-03-01 16:06:36.936134248 +0100
+@@ -39,12 +39,6 @@
+   root_extra_deps = []
+ }
+ 
+-if (is_official_build) {
+-  # An official (maximally optimized!) component (optimized for build times)
+-  # build doesn't make sense and usually doesn't work.
+-  assert(!is_component_build)
+-}
+-
+ # This file defines the following two main targets:
+ #
+ # "gn_all" is used to create explicit dependencies from the root BUILD.gn to
