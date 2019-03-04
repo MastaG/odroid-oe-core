@@ -52,6 +52,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-perl \
 	$(CURDIR)/meta-openembedded/meta-initramfs \
 	$(CURDIR)/openembedded-core/meta \
+	$(CURDIR)/meta-clang \
 	$(CURDIR)/meta-rust \
 	$(CURDIR)/odroid-os \
 	$(CURDIR)/meta-odroid \
