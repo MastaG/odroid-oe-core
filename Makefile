@@ -43,6 +43,7 @@ TMPDIR = $(TOPDIR)/tmp
 DEPDIR = $(TOPDIR)/.deps
 
 BBLAYERS ?= \
+	$(CURDIR)/meta-clang \
 	$(CURDIR)/meta-openembedded/meta-oe \
 	$(CURDIR)/meta-openembedded/meta-filesystems \
 	$(CURDIR)/meta-openembedded/meta-multimedia \
@@ -52,7 +53,6 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-perl \
 	$(CURDIR)/meta-openembedded/meta-initramfs \
 	$(CURDIR)/openembedded-core/meta \
-	$(CURDIR)/meta-clang \
 	$(CURDIR)/meta-rust \
 	$(CURDIR)/odroid-os \
 	$(CURDIR)/meta-odroid \
