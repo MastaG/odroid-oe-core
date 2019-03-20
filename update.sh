@@ -9,7 +9,7 @@ do
 	cd ..
 	git add ${i}
 done
-for i in bitbake meta-browser
+for i in meta-browser
 do
 	echo echo "Updating ${i}"
 	cd ${i}
