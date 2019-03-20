@@ -1,8 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI_append += " \
+SRC_URI_append = " \
 	file://chromium-widevine.patch \
-	file://minigbm_define_GBM_BO_IMPORT_FD_MODIFIER.patch;patchdir=third_party/minigbm/src \
 	"
 
 PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
