@@ -11,7 +11,7 @@ do
 done
 for i in meta-browser
 do
-	echo echo "Updating ${i}"
+	echo "Updating ${i}"
 	cd ${i}
 	git checkout master
 	git pull --all
