@@ -13,4 +13,5 @@ GN_ARGS += " \
  use_system_minigbm=false \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
+ arm_use_thumb=false \
 "
