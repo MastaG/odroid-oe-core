@@ -8,6 +8,8 @@ SRC_URI_append = " \
 PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
 
 GN_ARGS += " \
+ remove_webcore_debug_symbols=true \
+ enable_iterator_debugging=false \
  enable_hangout_services_extension=true \
  enable_widevine=true \
  use_system_minigbm=false \
