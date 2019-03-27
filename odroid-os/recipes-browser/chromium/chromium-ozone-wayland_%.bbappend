@@ -14,6 +14,10 @@ GN_ARGS += " \
  use_system_minigbm=false \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
- arm_use_thumb=false \
  symbol_level=2 \
+ ozone_platform_x11=true \
+ ozone_platform_gbm=true \
+ target_os=chromeos \
 "
+
+CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist"
