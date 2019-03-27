@@ -18,6 +18,7 @@ GN_ARGS += " \
  ozone_platform_x11=true \
  ozone_platform_gbm=true \
  enable_package_mash_services=true \
+ build_display_configration=true \
  target_os=chromeos \
 "
 
