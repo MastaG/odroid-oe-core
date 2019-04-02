@@ -18,8 +18,6 @@ GN_ARGS += " \
  ozone_platform_x11=true \
  ozone_platform_gbm=true \
  enable_package_mash_services=true \
- build_display_configuration=true \
- target_os="chromeos" \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist "
