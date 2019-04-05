@@ -34,7 +34,6 @@ GN_ARGS += " \
  ozone_platform_gbm=true \
  enable_package_mash_services=true \
  build_display_configuration=true \
- 
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 --enable-features=Mash "
