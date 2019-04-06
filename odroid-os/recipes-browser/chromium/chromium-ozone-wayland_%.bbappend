@@ -32,8 +32,6 @@ GN_ARGS += " \
  ozone_platform_x11=true \
  ozone_platform_gbm=true \
  enable_package_mash_services=true \
- build_display_configuration=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 --enable-features=Mash "
-CHROMIUM_EXTRA_ARGS_append = " --user-agent='Mozilla/5.0 (X11; CrOS armv7l 10895.56.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${PV} Safari/537.36' "
