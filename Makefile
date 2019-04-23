@@ -59,6 +59,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-browser \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5
+	$(CURDIR)/meta-selinux
 
 CONFFILES = \
 	$(TOPDIR)/env.source \
