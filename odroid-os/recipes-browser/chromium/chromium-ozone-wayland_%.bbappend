@@ -26,9 +26,14 @@ GN_ARGS += " \
  symbol_level=2 \
  enable_hangout_services_extension=true \
  enable_widevine=true \
+ ozone_platform_x11=true \
+ ozone_platform_gbm=true \
  use_system_minigbm=false \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
+ use_wayland_gbm=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 "
+
+PROVIDES = "chromium"
