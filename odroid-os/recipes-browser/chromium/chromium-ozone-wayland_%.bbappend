@@ -8,7 +8,8 @@ SRC_URI_append = " \
 	file://chromium-skia-harmony.patch \
 	file://chromium-system-icu.patch \
 	file://chromium-widevine.patch \
-	file://chromium_no_dmabuf.patch \
+	file://0001-ozone-wayland-Do-not-add-window-if-manager-does-not-.patch \
+	file://0001-ozone-wayland-Fix-NativeGpuMemoryBuffers-usage.patch \
 	"
 
 GN_UNBUNDLE_LIBS = " \
