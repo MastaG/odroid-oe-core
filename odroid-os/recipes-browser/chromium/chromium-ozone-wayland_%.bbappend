@@ -22,7 +22,6 @@ GN_UNBUNDLE_LIBS = " \
         libwebp \
         libxml \
         libxslt \
-        opus \
         yasm \
 "
 
@@ -30,7 +29,6 @@ DEPENDS += "\
 	fontconfig \
 	harfbuzz \
 	icu \
-	libopus \
 	libx11 \
 	libxcomposite \
 	libxcursor \
