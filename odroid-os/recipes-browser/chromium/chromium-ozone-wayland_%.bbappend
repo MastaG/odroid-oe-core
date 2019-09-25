@@ -2,14 +2,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append = " \
 	file://0001-generic_v4l2_device-allow-NV12-YVU420-on-all-ARM-pla.patch \
-	file://chromium-fix-the-flash-for-new-windows.patch \
-	file://chromium-fix-window-flash-for-some-WMs.patch \
-	file://chromium-glibc-2.29.patch \
 	file://chromium-skia-harmony.patch \
 	file://chromium-system-icu.patch \
 	file://chromium-widevine.patch \
-	file://0001-ozone-wayland-Do-not-add-window-if-manager-does-not-.patch \
-	file://0001-ozone-wayland-Fix-NativeGpuMemoryBuffers-usage.patch \
+	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
+	file://include-limits-in-web_time_range.cc.patch \
+	file://include-memory-in-one_euro_filter.h.patch \
+	file://link-against-harfbuzz-subset.patch \
 	"
 
 GN_UNBUNDLE_LIBS = " \
@@ -51,7 +50,7 @@ do_configure_prepend() {
 }
 
 
-PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
+PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups component-build"
 
 GN_ARGS += " \
  ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'link_pulseaudio=true', '', d)} \
