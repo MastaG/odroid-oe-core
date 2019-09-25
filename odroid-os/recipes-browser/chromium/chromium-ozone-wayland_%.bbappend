@@ -1,7 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append = " \
-	file://0001-generic_v4l2_device-allow-NV12-YVU420-on-all-ARM-pla.patch \
 	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
 	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
