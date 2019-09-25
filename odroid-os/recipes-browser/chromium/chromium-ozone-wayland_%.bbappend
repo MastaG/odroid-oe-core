@@ -4,7 +4,6 @@ SRC_URI_append = " \
 	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
 	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
-	file://include-limits-in-web_time_range.cc.patch \
 	file://include-memory-in-one_euro_filter.h.patch \
 	file://link-against-harfbuzz-subset.patch \
 	"
