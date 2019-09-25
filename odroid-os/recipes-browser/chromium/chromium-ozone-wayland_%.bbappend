@@ -3,7 +3,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = " \
 	file://0001-generic_v4l2_device-allow-NV12-YVU420-on-all-ARM-pla.patch \
 	file://chromium-skia-harmony.patch \
-	file://chromium-system-icu.patch \
 	file://chromium-widevine.patch \
 	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
 	file://include-limits-in-web_time_range.cc.patch \
@@ -16,7 +15,6 @@ GN_UNBUNDLE_LIBS = " \
         fontconfig \
         freetype \
         harfbuzz-ng \
-        icu \
         libjpeg \
         libwebp \
         libxml \
@@ -27,7 +25,6 @@ GN_UNBUNDLE_LIBS = " \
 DEPENDS += "\
 	fontconfig \
 	harfbuzz \
-	icu \
 	libx11 \
 	libxcomposite \
 	libxcursor \
@@ -50,7 +47,7 @@ do_configure_prepend() {
 }
 
 
-PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups component-build"
+PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
 
 GN_ARGS += " \
  ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'link_pulseaudio=true', '', d)} \
@@ -63,20 +60,6 @@ GN_ARGS += " \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
 "
-
-# Due to building against the system icu library, icudtl.dat is not created inside the build directory.
-# So create an empty file to satisfy the original do_install function and delete it afterwards if it is empty.
-
-do_install_prepend() {
-	touch icudtl.dat
-}
-
-do_install_append() {
-	if [ ! -s ${D}${libdir}/chromium/icudtl.dat ]
-	then
-		rm -f ${D}${libdir}/chromium/icudtl.dat
-	fi
-}
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 "
 
