@@ -58,7 +58,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-odroid \
 	$(CURDIR)/meta-browser \
 	$(CURDIR)/meta-local \
-	$(CURDIR)/meta-qt5
+	$(CURDIR)/meta-qt5 \
 	$(CURDIR)/meta-selinux
 
 CONFFILES = \
