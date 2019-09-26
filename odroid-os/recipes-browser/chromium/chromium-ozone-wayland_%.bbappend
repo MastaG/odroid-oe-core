@@ -8,21 +8,7 @@ SRC_URI_append = " \
 	file://link-against-harfbuzz-subset.patch \
 	"
 
-GN_UNBUNDLE_LIBS = " \
-        flac \
-        fontconfig \
-        freetype \
-        harfbuzz-ng \
-        libjpeg \
-        libwebp \
-        libxml \
-        libxslt \
-        yasm \
-"
-
 DEPENDS += "\
-	fontconfig \
-	harfbuzz \
 	libx11 \
 	libxcomposite \
 	libxcursor \
@@ -59,6 +45,6 @@ GN_ARGS += " \
  use_exynos_minigbm=true \
 "
 
-CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 "
+CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 
 PROVIDES = "chromium"
