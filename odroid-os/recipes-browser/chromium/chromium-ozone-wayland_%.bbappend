@@ -24,7 +24,7 @@ DEPENDS += "\
 	pipewire \
 "
 
-GN_UNBUNDLE_LIBS += " \
+GN_UNBUNDLE_LIBS_append += " \
 	fontconfig \
 	freetype \
 "
