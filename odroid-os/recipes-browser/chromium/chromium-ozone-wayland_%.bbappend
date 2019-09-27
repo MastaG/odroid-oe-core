@@ -21,6 +21,7 @@ DEPENDS += "\
 	libxrender \
 	libxscrnsaver \
 	libxtst \
+	pipewire \
 "
 
 GN_UNBUNDLE_LIBS += " \
@@ -39,9 +40,19 @@ do_configure_prepend() {
 
 PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
 
+# Don't explicitly disable remoting
+GN_ARGS_remove = "enable_remoting=false"
+
+# Also enable X11
+GN_ARGS_remove = "ozone_platform_x11=false"
+
+# Build using provided libgbm and libdrm
+GN_ARGS_remove = "use_system_minigbm=true"
+GN_ARGS_remove = "use_system_libdrm=true"
+
+
 GN_ARGS += " \
  ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'link_pulseaudio=true', '', d)} \
- symbol_level=2 \
  enable_hangout_services_extension=true \
  enable_widevine=true \
  ozone_platform_x11=true \
