@@ -9,6 +9,7 @@ SRC_URI_append = " \
 	"
 
 DEPENDS += "\
+	fontconfig \
 	libx11 \
 	libxcomposite \
 	libxcursor \
@@ -20,6 +21,11 @@ DEPENDS += "\
 	libxrender \
 	libxscrnsaver \
 	libxtst \
+"
+
+GN_UNBUNDLE_LIBS += " \
+	fontconfig \
+	freetype \
 "
 
 do_configure_prepend() {
@@ -43,6 +49,8 @@ GN_ARGS += " \
  use_system_minigbm=false \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
+ rtc_use_pipewire=true \
+ enable_swiftshader=false \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
