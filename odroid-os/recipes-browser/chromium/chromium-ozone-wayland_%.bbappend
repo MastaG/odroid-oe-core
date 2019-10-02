@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI_append = " \
+SRC_URI_append += " \
 	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
 	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
@@ -10,17 +10,6 @@ SRC_URI_append = " \
 
 DEPENDS += "\
 	fontconfig \
-	libx11 \
-	libxcomposite \
-	libxcursor \
-	libxdamage \
-	libxext \
-	libxfixes \
-	libxi \
-	libxrandr \
-	libxrender \
-	libxscrnsaver \
-	libxtst \
 	pipewire \
 "
 
@@ -43,9 +32,6 @@ PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cu
 # Don't explicitly disable remoting
 GN_ARGS_remove = "enable_remoting=false"
 
-# Also enable X11
-GN_ARGS_remove = "ozone_platform_x11=false"
-
 # Build using provided libgbm and libdrm
 GN_ARGS_remove = "use_system_minigbm=true"
 GN_ARGS_remove = "use_system_libdrm=true"
@@ -55,8 +41,6 @@ GN_ARGS += " \
  ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'link_pulseaudio=true', '', d)} \
  enable_hangout_services_extension=true \
  enable_widevine=true \
- ozone_platform_x11=true \
- ozone_platform_gbm=true \
  use_system_minigbm=false \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
@@ -64,6 +48,6 @@ GN_ARGS += " \
  enable_swiftshader=false \
 "
 
-CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
+CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 
 PROVIDES = "chromium"
