@@ -1,9 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI_append = " \
+SRC_URI_append += " \
 	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
-	file://fix-wrong-string-initialization-in-LinkedHashSet.patch \
 	file://include-memory-in-one_euro_filter.h.patch \
 	file://link-against-harfbuzz-subset.patch \
 	"
@@ -61,9 +60,9 @@ GN_ARGS += " \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
  rtc_use_pipewire=true \
- enable_swiftshader=false \
+ use_thin_lto=true \
 "
 
-CHROMIUM_EXTRA_ARGS_append = " --in-process-gpu --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
+CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 
 PROVIDES = "chromium"
