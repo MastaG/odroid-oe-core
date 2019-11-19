@@ -60,7 +60,6 @@ GN_ARGS += " \
  use_system_libdrm=false \
  use_exynos_minigbm=true \
  rtc_use_pipewire=true \
- use_thin_lto=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
