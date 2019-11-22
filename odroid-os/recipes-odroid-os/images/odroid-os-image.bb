@@ -63,6 +63,6 @@ license_create_manifest() {
 
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_removeopkgleftovers; rootfs_speedup_dropbearkey; "
 
-IMAGE_INSTALL += "chromium-ozone-wayland weston wayland"
+IMAGE_INSTALL += "chromium-ozone-wayland weston wayland firefox"
 
 export IMAGE_BASENAME = "odroid-os-wayland"
