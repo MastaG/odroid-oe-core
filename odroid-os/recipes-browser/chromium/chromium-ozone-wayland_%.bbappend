@@ -3,8 +3,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append += " \
 	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
-	file://include-memory-in-one_euro_filter.h.patch \
-	file://link-against-harfbuzz-subset.patch \
+	file://add-missing-include-for-unique_ptr.patch \
+        file://dns_util-make-DohUpgradeEntry-non-const.patch \
+        file://fix-shutdown-crash-in-ProfileManager.patch \
+        file://fix-spammy-unique-font-matching-log.patch \
 	"
 
 DEPENDS += "\
@@ -34,6 +36,8 @@ do_configure_prepend() {
 	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
 	# https://crbug.com/893950
 	sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' third_party/blink/renderer/core/xml/*.cc third_party/blink/renderer/core/xml/parser/xml_document_parser.cc third_party/libxml/chromium/libxml_utils.cc
+	# Force script incompatible with Python 3 to use /usr/bin/python2
+	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 }
 
 
@@ -64,4 +68,4 @@ GN_ARGS += " \
 
 CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 
-PROVIDES = "chromium"
+PROVIDES += "chromium"
