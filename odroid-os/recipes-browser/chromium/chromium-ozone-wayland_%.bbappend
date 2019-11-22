@@ -1,10 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append += " \
-	file://chromium-skia-harmony.patch \
 	file://chromium-widevine.patch \
 	file://add-missing-include-for-unique_ptr.patch \
-        file://dns_util-make-DohUpgradeEntry-non-const.patch \
         file://fix-shutdown-crash-in-ProfileManager.patch \
         file://fix-spammy-unique-font-matching-log.patch \
 	"
