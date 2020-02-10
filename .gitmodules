@@ -25,3 +25,6 @@
 [submodule "meta-python2"]
 	path = meta-python2
 	url = https://git.openembedded.org/meta-python2
+[submodule "meta-odroid"]
+	path = meta-odroid
+	url = https://github.com/akuster/meta-odroid.git
