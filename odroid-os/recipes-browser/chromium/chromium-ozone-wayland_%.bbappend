@@ -50,8 +50,8 @@ GN_ARGS_remove = "enable_remoting=false"
 GN_ARGS_remove = "ozone_platform_x11=false"
 
 # Build using provided libgbm and libdrm
-GN_ARGS_remove = "use_system_minigbm=true"
-GN_ARGS_remove = "use_system_libdrm=true"
+# GN_ARGS_remove = "use_system_minigbm=true"
+# GN_ARGS_remove = "use_system_libdrm=true"
 
 
 GN_ARGS += " \
@@ -59,10 +59,6 @@ GN_ARGS += " \
  enable_hangout_services_extension=true \
  enable_widevine=true \
  ozone_platform_x11=true \
- ozone_platform_gbm=true \
- use_system_minigbm=false \
- use_system_libdrm=false \
- use_exynos_minigbm=true \
  rtc_use_pipewire=true \
  use_thin_lto=true \
 "
