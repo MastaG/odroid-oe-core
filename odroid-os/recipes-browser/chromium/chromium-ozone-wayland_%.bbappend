@@ -41,7 +41,7 @@ do_configure_prepend() {
 }
 
 
-PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting use-linux-v4l2 cups"
+PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting cups"
 
 # Don't explicitly disable remoting
 GN_ARGS_remove = "enable_remoting=false"
