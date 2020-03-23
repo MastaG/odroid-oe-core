@@ -3,10 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append += " \
 	file://chromium-widevine.patch \
         file://sync-enable-USSPasswords-by-default.patch \
-	file://fix-building-with-system-zlib.patch \
 	file://remove-verbose-logging-in-local-unique-font-matching.patch \
-	file://rename-Relayout-in-DesktopWindowTreeHostPlatform.patch \
-	file://rebuild-Linux-frame-button-cache-when-activation.patch \
 	"
 
 DEPENDS += "\
@@ -50,8 +47,8 @@ GN_ARGS_remove = "enable_remoting=false"
 GN_ARGS_remove = "ozone_platform_x11=false"
 
 # Build using provided libgbm and libdrm
-GN_ARGS_remove = "use_system_minigbm=true"
-GN_ARGS_remove = "use_system_libdrm=true"
+# GN_ARGS_remove = "use_system_minigbm=true"
+# GN_ARGS_remove = "use_system_libdrm=true"
 
 
 GN_ARGS += " \
@@ -59,11 +56,7 @@ GN_ARGS += " \
  enable_hangout_services_extension=true \
  enable_widevine=true \
  ozone_platform_x11=true \
- use_system_minigbm=false \
- use_system_libdrm=false \
- use_exynos_minigbm=true \
  rtc_use_pipewire=true \
- use_thin_lto=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
