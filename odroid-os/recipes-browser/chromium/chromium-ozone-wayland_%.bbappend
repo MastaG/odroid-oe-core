@@ -2,8 +2,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append += " \
 	file://chromium-widevine.patch \
-        file://sync-enable-USSPasswords-by-default.patch \
+	file://sync-enable-USSPasswords-by-default.patch \
 	file://remove-verbose-logging-in-local-unique-font-matching.patch \
+	file://std_size_t.patch \
+	file://stdint.patch \
+	file://include_string.patch \
+	file://0023-chromium-Move-CharAllocator-definition-to-a-header-f.patch \
+	file://0001-Remove-glslang-pool_allocator-setAllocator.patch \
 	"
 
 DEPENDS += "\
@@ -22,11 +27,6 @@ DEPENDS += "\
 	pipewire \
 "
 
-# GN_UNBUNDLE_LIBS_append += " \
-# 	fontconfig \
-# 	freetype \
-# "
-
 do_configure_prepend() {
 	cd ${S}
 	# Force script incompatible with Python 3 to use /usr/bin/python2
@@ -40,15 +40,12 @@ do_configure_prepend() {
 
 PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting cups"
 
-# Don't explicitly disable remoting
-GN_ARGS_remove = "enable_remoting=false"
-
 # Also enable X11
 GN_ARGS_remove = "ozone_platform_x11=false"
 
 # Build using provided libgbm and libdrm
-# GN_ARGS_remove = "use_system_minigbm=true"
-# GN_ARGS_remove = "use_system_libdrm=true"
+GN_ARGS_remove = "use_system_minigbm=true"
+GN_ARGS_remove = "use_system_libdrm=true"
 
 
 GN_ARGS += " \
@@ -56,6 +53,9 @@ GN_ARGS += " \
  enable_hangout_services_extension=true \
  enable_widevine=true \
  ozone_platform_x11=true \
+ use_system_minigbm=false \
+ use_system_libdrm=false \
+ use_exynos_minigbm=true \
  rtc_use_pipewire=true \
 "
 
