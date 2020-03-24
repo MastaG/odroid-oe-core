@@ -22,10 +22,10 @@ DEPENDS += "\
 	pipewire \
 "
 
-GN_UNBUNDLE_LIBS_append += " \
-	fontconfig \
-	freetype \
-"
+# GN_UNBUNDLE_LIBS_append += " \
+# 	fontconfig \
+# 	freetype \
+# "
 
 do_configure_prepend() {
 	cd ${S}
