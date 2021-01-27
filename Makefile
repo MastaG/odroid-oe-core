@@ -43,7 +43,6 @@ TMPDIR = $(TOPDIR)/tmp
 DEPDIR = $(TOPDIR)/.deps
 
 BBLAYERS ?= \
-	$(CURDIR)/meta-clang \
 	$(CURDIR)/meta-openembedded/meta-oe \
 	$(CURDIR)/meta-openembedded/meta-filesystems \
 	$(CURDIR)/meta-openembedded/meta-multimedia \
@@ -60,7 +59,8 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5 \
 	$(CURDIR)/meta-selinux \
-	$(CURDIR)/meta-python2
+	$(CURDIR)/meta-python2 \
+	$(CURDIR)/meta-clang \
 
 CONFFILES = \
 	$(TOPDIR)/env.source \
