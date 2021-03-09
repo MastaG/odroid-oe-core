@@ -15,11 +15,8 @@ PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting cups"
 
 
 GN_ARGS += " \
- ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'link_pulseaudio=true', '', d)} \
  enable_hangout_services_extension=true \
  enable_widevine=true \
 "
 
-CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
-
-PROVIDES += "chromium"
+CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blocklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"

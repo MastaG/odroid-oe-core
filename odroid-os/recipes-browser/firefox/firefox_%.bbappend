@@ -1,2 +1,1 @@
-DEPENDS += "python-native"
-PACKAGECONFIG = "alsa wayland webrtc gpu webgl"
+PACKAGECONFIG = "alsa wayland webrtc gpu webgl forbit-multiple-compositors"
