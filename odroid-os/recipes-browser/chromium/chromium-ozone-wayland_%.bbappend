@@ -1,5 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
+SRC_URI_append += " \
+	file://chromium-glibc-2.33.patch \
+	file://x11-ozone-fix-two-edge-cases.patch \
+	"
+
 do_configure_prepend() {
 	cd ${S}
 	# Force script incompatible with Python 3 to use /usr/bin/python2
