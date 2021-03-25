@@ -55,7 +55,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-rust \
 	$(CURDIR)/odroid-os \
 	$(CURDIR)/meta-odroid \
-	$(CURDIR)/meta-browser \
+	$(CURDIR)/meta-browser/meta-chromium \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5 \
 	$(CURDIR)/meta-selinux \

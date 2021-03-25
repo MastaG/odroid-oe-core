@@ -1,4 +1,6 @@
+REQUIRED_DISTRO_FEATURES = "x11"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+RUNTIME = "llvm"
 
 SRC_URI_append += " \
 	file://chromium-glibc-2.33.patch \
@@ -18,10 +20,34 @@ do_configure_prepend() {
 
 PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting cups"
 
+DEPENDS += " \
+	pipewire \
+	libx11 \
+	libxcomposite \
+	libxcursor \
+	libxdamage \
+	libxext \
+	libxfixes \
+	libxi \
+	libxrandr \
+	libxrender \
+	libxscrnsaver \
+	libxtst \
+	"
+
+GN_ARGS_remove = " \
+ ozone_platform_x11=false \
+ use_gtk=false \
+ use_x11=false \
+ "
 
 GN_ARGS += " \
  enable_hangout_services_extension=true \
  enable_widevine=true \
+ rtc_use_pipewire=true \
+ rtc_pipewire_version="0.3" \
+ link_pulseaudio=true \
+ ozone_platform_x11=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --ignore-gpu-blocklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
