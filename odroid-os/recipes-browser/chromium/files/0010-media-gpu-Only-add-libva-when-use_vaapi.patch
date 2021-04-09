@@ -1,0 +1,14 @@
+diff -Naur chromium-89.0.4389.90.orig/media/gpu/BUILD.gn chromium-89.0.4389.90/media/gpu/BUILD.gn
+--- chromium-89.0.4389.90.orig/media/gpu/BUILD.gn	2021-04-02 09:58:19.086092264 +0200
++++ chromium-89.0.4389.90/media/gpu/BUILD.gn	2021-04-02 10:31:30.587548049 +0200
+@@ -485,7 +485,9 @@
+     sources = [ "video_encode_accelerator_unittest.cc" ]
+     if (use_x11) {
+       deps += [ "//ui/gfx/x" ]
+-      public_configs = [ "//build/config/linux/libva" ]
++      if (use_vaapi) {
++        public_configs = [ "//build/config/linux/libva" ]
++      }
+     }
+     if (use_ozone) {
+       deps += [ "//ui/ozone" ]

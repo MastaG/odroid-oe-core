@@ -1,0 +1,13 @@
+diff -Naur chromium-89.0.4389.90.orig/media/capture/video/linux/video_capture_device_factory_linux.cc chromium-89.0.4389.90/media/capture/video/linux/video_capture_device_factory_linux.cc
+--- chromium-89.0.4389.90.orig/media/capture/video/linux/video_capture_device_factory_linux.cc	2021-03-13 00:57:26.000000000 +0100
++++ chromium-89.0.4389.90/media/capture/video/linux/video_capture_device_factory_linux.cc	2021-04-02 10:29:03.054891180 +0200
+@@ -244,7 +244,8 @@
+         continue;
+       }
+ 
+-      devices_info.emplace_back(VideoCaptureDeviceDescriptor(
++      // HACK: Somehow the newest chromium would prefer using the last device in some cases, e.g. apprtc
++      devices_info.emplace(devices_info.begin(), VideoCaptureDeviceDescriptor(
+           display_name, unique_id, model_id,
+           VideoCaptureApi::LINUX_V4L2_SINGLE_PLANE, GetControlSupport(fd.get()),
+           VideoCaptureTransportType::OTHER_TRANSPORT, facing_mode));

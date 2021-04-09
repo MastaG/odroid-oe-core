@@ -1,0 +1,11 @@
+--- a/third_party/angle/gni/angle.gni.orig	2021-03-30 23:13:27.000000000 +0200
++++ b/third_party/angle/gni/angle.gni	2021-04-09 10:50:07.044999017 +0200
+@@ -107,7 +107,7 @@
+ 
+   angle_enable_d3d9 = is_win && !angle_is_winuwp
+   angle_enable_d3d11 = is_win
+-  angle_enable_gl = (ozone_platform_gbm || (!is_linux && !is_chromeos) ||
++  angle_enable_gl = ((ozone_platform_gbm || ozone_platform_wayland) || (!is_linux && !is_chromeos) ||
+                      (angle_use_x11 && !is_chromeos)) && !is_fuchsia &&
+                     !angle_is_winuwp && !is_ggp && !is_win_arm64
+ 
