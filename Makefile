@@ -59,7 +59,6 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5 \
 	$(CURDIR)/meta-selinux \
-	$(CURDIR)/meta-python2 \
 	$(CURDIR)/meta-clang \
 
 CONFFILES = \
