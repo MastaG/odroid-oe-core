@@ -50,6 +50,7 @@ DEPENDS += " \
 
 GN_ARGS_remove = " \
  ozone_platform_x11=false \
+ use_gtk=false \
  "
 
 GN_ARGS += " \
@@ -59,6 +60,8 @@ GN_ARGS += " \
  rtc_pipewire_version="0.3" \
  link_pulseaudio=true \
  ozone_platform_x11=true \
+ ozone_platform_drm=false \
+ ozone_platform_gbm=false \
  enable_mdns=true \
  rtc_use_h264=true \
  arm_use_thumb=false \
@@ -67,6 +70,8 @@ GN_ARGS += " \
  use_v4l2_codec=true \
  use_v4lplugin=true \
  use_linux_v4l2_only=true \
+ use_gtk=true \
+ use_glib=true \
 "
 
 CHROMIUM_EXTRA_ARGS_append = " --no-sandbox --gpu-sandbox-start-early --ignore-gpu-blocklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 --enable-accelerated-video-decode"
