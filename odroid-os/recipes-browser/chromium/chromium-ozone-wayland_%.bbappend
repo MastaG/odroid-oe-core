@@ -28,7 +28,7 @@ do_configure_prepend() {
 }
 
 
-PACKAGECONFIG = "proprietary-codecs use-egl impl-side-painting cups"
+PACKAGECONFIG = "proprietary-codecs use-egl cups"
 
 DEPENDS += " \
 	pipewire \
