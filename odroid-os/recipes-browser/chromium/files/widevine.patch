@@ -1,29 +1,7 @@
-diff -Naur chromium-89.0.4389.90.orig/third_party/widevine/cdm/widevine_cdm_version.h chromium-89.0.4389.90/third_party/widevine/cdm/widevine_cdm_version.h
---- chromium-89.0.4389.90.orig/third_party/widevine/cdm/widevine_cdm_version.h	2021-03-13 00:57:47.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/widevine/cdm/widevine_cdm_version.h	2021-03-31 23:07:10.519932685 +0200
-@@ -11,5 +11,6 @@
- // If the Widevine CDM is available define the following:
- //  - WIDEVINE_CDM_VERSION_STRING (with the version of the CDM that's available
- //    as a string, e.g., "1.0.123.456").
-+#define WIDEVINE_CDM_VERSION_STRING "undefined"
- 
- #endif  // WIDEVINE_CDM_VERSION_H_
-diff -Naur chromium-89.0.4389.90.orig/third_party/widevine/cdm/widevine.gni chromium-89.0.4389.90/third_party/widevine/cdm/widevine.gni
---- chromium-89.0.4389.90.orig/third_party/widevine/cdm/widevine.gni	2021-03-13 00:57:47.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/widevine/cdm/widevine.gni	2021-03-31 23:07:10.519932685 +0200
-@@ -24,7 +24,7 @@
- # supported via Android MediaDrm API.
- library_widevine_cdm_available =
-     (is_chromeos && (target_cpu == "x64" || target_cpu == "arm")) ||
--    (is_linux && (target_cpu == "x86" || target_cpu == "x64")) ||
-+    (is_linux && (target_cpu == "x86" || target_cpu == "x64" || target_cpu == "arm")) ||
-     (is_mac && (target_cpu == "x64" || target_cpu == "arm64")) ||
-     (is_win && (target_cpu == "x86" || target_cpu == "x64"))
- 
-diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_content_client.cc chromium-89.0.4389.90/chrome/common/chrome_content_client.cc
---- chromium-89.0.4389.90.orig/chrome/common/chrome_content_client.cc	2021-03-13 00:57:19.000000000 +0100
-+++ chromium-89.0.4389.90/chrome/common/chrome_content_client.cc	2021-03-31 23:07:10.519932685 +0200
-@@ -227,7 +227,7 @@
+diff -Naur a/chrome/common/chrome_content_client.cc b/chrome/common/chrome_content_client.cc
+--- a/chrome/common/chrome_content_client.cc	2021-04-27 06:07:27.000000000 +0200
++++ b/chrome/common/chrome_content_client.cc	2021-05-10 13:37:12.432738186 +0200
+@@ -228,7 +228,7 @@
          // BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)) && (defined(OS_LINUX) ||
          // defined(OS_CHROMEOS))
  
@@ -32,7 +10,7 @@ diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_content_client.cc chr
      (defined(OS_LINUX) || defined(OS_CHROMEOS))
  // On Linux/ChromeOS we have to preload the CDM since it uses the zygote
  // sandbox. On Windows and Mac, the bundled CDM is handled by the component
-@@ -296,7 +296,7 @@
+@@ -297,7 +297,7 @@
        }());
    return s_cdm_info->get();
  }
@@ -41,7 +19,7 @@ diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_content_client.cc chr
          // defined(OS_CHROMEOS))
  
  #if BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT) && \
-@@ -410,7 +410,7 @@
+@@ -411,7 +411,7 @@
      // case both versions will be the same and point to the same directory, so
      // it doesn't matter which one is loaded.
      content::CdmInfo* bundled_widevine = nullptr;
@@ -50,10 +28,10 @@ diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_content_client.cc chr
      bundled_widevine = GetBundledWidevine();
  #endif
  
-diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_paths.cc chromium-89.0.4389.90/chrome/common/chrome_paths.cc
---- chromium-89.0.4389.90.orig/chrome/common/chrome_paths.cc	2021-03-13 00:57:19.000000000 +0100
-+++ chromium-89.0.4389.90/chrome/common/chrome_paths.cc	2021-03-31 23:07:10.519932685 +0200
-@@ -337,8 +337,17 @@
+diff -Naur a/chrome/common/chrome_paths.cc b/chrome/common/chrome_paths.cc
+--- a/chrome/common/chrome_paths.cc	2021-04-27 06:07:27.000000000 +0200
++++ b/chrome/common/chrome_paths.cc	2021-05-10 13:37:12.432738186 +0200
+@@ -315,8 +315,17 @@
        break;
  
  #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
@@ -72,7 +50,7 @@ diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_paths.cc chromium-89.
        if (!GetComponentDirectory(&cur))
          return false;
  #if !BUILDFLAG(IS_CHROMEOS_ASH)
-@@ -348,7 +357,7 @@
+@@ -326,7 +335,7 @@
  #endif  // !BUILDFLAG(IS_CHROMEOS_ASH)
        break;
  #endif  // (defined(OS_LINUX) || defined(OS_CHROMEOS)) &&
@@ -81,3 +59,25 @@ diff -Naur chromium-89.0.4389.90.orig/chrome/common/chrome_paths.cc chromium-89.
  
  #if (defined(OS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS)) && \
      BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
+diff -Naur a/third_party/widevine/cdm/widevine_cdm_version.h b/third_party/widevine/cdm/widevine_cdm_version.h
+--- a/third_party/widevine/cdm/widevine_cdm_version.h	2021-04-27 06:07:59.000000000 +0200
++++ b/third_party/widevine/cdm/widevine_cdm_version.h	2021-05-10 13:37:12.432738186 +0200
+@@ -11,5 +11,6 @@
+ // If the Widevine CDM is available define the following:
+ //  - WIDEVINE_CDM_VERSION_STRING (with the version of the CDM that's available
+ //    as a string, e.g., "1.0.123.456").
++#define WIDEVINE_CDM_VERSION_STRING "undefined"
+ 
+ #endif  // WIDEVINE_CDM_VERSION_H_
+diff -Naur a/third_party/widevine/cdm/widevine.gni b/third_party/widevine/cdm/widevine.gni
+--- a/third_party/widevine/cdm/widevine.gni	2021-04-27 06:07:59.000000000 +0200
++++ b/third_party/widevine/cdm/widevine.gni	2021-05-10 13:39:12.544123284 +0200
+@@ -26,7 +26,7 @@
+ library_widevine_cdm_available =
+     (is_chromeos_ash && (target_cpu == "x64" || target_cpu == "arm")) ||
+     ((is_linux || is_chromeos_lacros) &&
+-     (target_cpu == "x86" || target_cpu == "x64")) ||
++     (target_cpu == "x86" || target_cpu == "x64" || target_cpu == "arm")) ||
+     (is_mac && (target_cpu == "x64" || target_cpu == "arm64")) ||
+     (is_win && (target_cpu == "x86" || target_cpu == "x64"))
+ 

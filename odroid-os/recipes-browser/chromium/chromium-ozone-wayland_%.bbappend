@@ -7,18 +7,15 @@ SRC_URI_append += " \
 	file://add_GL_RGB_YCRCB_420_CHROMIUM.patch \
 	file://widevine.patch \
 	file://arm_neon.patch \
-	file://0001-Add-support-for-V4L2VDA-on-Linux.patch \
-	file://0002-Add-mmap-via-libv4l-to-generic_v4l2_device.patch \
-	file://0003-media-capture-linux-Support-libv4l2-plugins.patch \
-	file://0004-media-Enable-mojo-media-when-using-v4l2-codec-on-des.patch \
 	file://0005-cld3-Avoid-unaligned-accesses.patch \
-	file://0006-media-gpu-v4l2-Use-POLLIN-for-pending-event.patch \
-	file://0008-media-capture-linux-Prefer-using-the-first-device.patch \
-	file://0009-media-gpu-v4l2-Fix-compile-error-when-ozone-not-enab.patch \
-	file://0010-media-gpu-Only-add-libva-when-use_vaapi.patch \
-	file://0001-ozone-wayland-watch-fd-on-a-dedicated-thread.patch \
 	file://angle_gl_enable_when_ozone_wl.patch \
-	"
+	file://fix-crash-in-ThemeService.patch \
+	file://extend-enable-accelerated-video-decode-flag.patch \
+	file://sql-make-VirtualCursor-standard-layout-type.patch \
+	file://fix-harfbuzz-supp-size.patch \
+	file://fix-ruy-numeric-limits.patch \
+"
+
 
 do_configure_prepend() {
 	cd ${S}
@@ -67,9 +64,6 @@ GN_ARGS += " \
  arm_use_thumb=false \
  arm_use_neon=true \
  arm_optionally_use_neon=false \
- use_v4l2_codec=true \
- use_v4lplugin=true \
- use_linux_v4l2_only=true \
  use_gtk=true \
  use_glib=true \
 "
