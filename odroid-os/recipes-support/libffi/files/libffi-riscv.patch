@@ -806,87 +806,87 @@ diff -rupN libffi-3.1-orig/Makefile.in libffi-3.1/Makefile.in
 +++ libffi-3.1/Makefile.in	2015-04-14 01:26:45.080389939 -0700
 @@ -82,53 +82,54 @@ host_triplet = @host@
  target_triplet = @target@
- @FFI_DEBUG_TRUE@am__append_1 = src/debug.c
- @MIPS_TRUE@am__append_2 = src/mips/ffi.c src/mips/o32.S src/mips/n32.S
--@BFIN_TRUE@am__append_3 = src/bfin/ffi.c src/bfin/sysv.S
--@X86_TRUE@am__append_4 = src/x86/ffi.c src/x86/sysv.S src/x86/win32.S
--@X86_FREEBSD_TRUE@am__append_5 = src/x86/ffi.c src/x86/freebsd.S src/x86/win32.S
--@X86_WIN32_TRUE@am__append_6 = src/x86/ffi.c src/x86/win32.S
--@X86_WIN64_TRUE@am__append_7 = src/x86/ffi.c src/x86/win64.S
--@X86_DARWIN_TRUE@am__append_8 = src/x86/ffi.c src/x86/darwin.S src/x86/ffi64.c src/x86/darwin64.S
--@X86_DARWIN32_TRUE@@X86_DARWIN_TRUE@am__append_9 = src/x86/win32.S
--@SPARC_TRUE@am__append_10 = src/sparc/ffi.c src/sparc/v8.S src/sparc/v9.S
--@ALPHA_TRUE@am__append_11 = src/alpha/ffi.c src/alpha/osf.S
--@IA64_TRUE@am__append_12 = src/ia64/ffi.c src/ia64/unix.S
--@M32R_TRUE@am__append_13 = src/m32r/sysv.S src/m32r/ffi.c
--@M68K_TRUE@am__append_14 = src/m68k/ffi.c src/m68k/sysv.S
--@M88K_TRUE@am__append_15 = src/m88k/ffi.c src/m88k/obsd.S
--@MOXIE_TRUE@am__append_16 = src/moxie/ffi.c src/moxie/eabi.S
--@MICROBLAZE_TRUE@am__append_17 = src/microblaze/ffi.c src/microblaze/sysv.S
--@NIOS2_TRUE@am__append_18 = src/nios2/sysv.S src/nios2/ffi.c
--@POWERPC_TRUE@am__append_19 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/ffi_linux64.c src/powerpc/sysv.S src/powerpc/ppc_closure.S src/powerpc/linux64.S src/powerpc/linux64_closure.S
--@POWERPC_AIX_TRUE@am__append_20 = src/powerpc/ffi_darwin.c src/powerpc/aix.S src/powerpc/aix_closure.S
--@POWERPC_DARWIN_TRUE@am__append_21 = src/powerpc/ffi_darwin.c src/powerpc/darwin.S src/powerpc/darwin_closure.S
--@POWERPC_FREEBSD_TRUE@am__append_22 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/sysv.S src/powerpc/ppc_closure.S
--@AARCH64_TRUE@am__append_23 = src/aarch64/sysv.S src/aarch64/ffi.c
--@ARC_TRUE@am__append_24 = src/arc/arcompact.S src/arc/ffi.c
--@ARM_TRUE@am__append_25 = src/arm/sysv.S src/arm/ffi.c
--@ARM_TRUE@@FFI_EXEC_TRAMPOLINE_TABLE_TRUE@am__append_26 = src/arm/trampoline.S
--@AVR32_TRUE@am__append_27 = src/avr32/sysv.S src/avr32/ffi.c
--@LIBFFI_CRIS_TRUE@am__append_28 = src/cris/sysv.S src/cris/ffi.c
--@FRV_TRUE@am__append_29 = src/frv/eabi.S src/frv/ffi.c
--@S390_TRUE@am__append_30 = src/s390/sysv.S src/s390/ffi.c
--@X86_64_TRUE@am__append_31 = src/x86/ffi64.c src/x86/unix64.S src/x86/ffi.c src/x86/sysv.S
--@SH_TRUE@am__append_32 = src/sh/sysv.S src/sh/ffi.c
--@SH64_TRUE@am__append_33 = src/sh64/sysv.S src/sh64/ffi.c
--@PA_LINUX_TRUE@am__append_34 = src/pa/linux.S src/pa/ffi.c
--@PA_HPUX_TRUE@am__append_35 = src/pa/hpux32.S src/pa/ffi.c
--@TILE_TRUE@am__append_36 = src/tile/tile.S src/tile/ffi.c
--@XTENSA_TRUE@am__append_37 = src/xtensa/sysv.S src/xtensa/ffi.c
--@METAG_TRUE@am__append_38 = src/metag/sysv.S src/metag/ffi.c
--@VAX_TRUE@am__append_39 = src/vax/elfbsd.S src/vax/ffi.c
-+@RISCV_TRUE@am__append_3 = src/riscv/ffi.c src/riscv/sysv.S
-+@BFIN_TRUE@am__append_4 = src/bfin/ffi.c src/bfin/sysv.S
-+@X86_TRUE@am__append_5 = src/x86/ffi.c src/x86/sysv.S src/x86/win32.S
-+@X86_FREEBSD_TRUE@am__append_6 = src/x86/ffi.c src/x86/freebsd.S src/x86/win32.S
-+@X86_WIN32_TRUE@am__append_7 = src/x86/ffi.c src/x86/win32.S
-+@X86_WIN64_TRUE@am__append_8 = src/x86/ffi.c src/x86/win64.S
-+@X86_DARWIN_TRUE@am__append_9 = src/x86/ffi.c src/x86/darwin.S src/x86/ffi64.c src/x86/darwin64.S
-+@X86_DARWIN32_TRUE@@X86_DARWIN_TRUE@am__append_10 = src/x86/win32.S
-+@SPARC_TRUE@am__append_11 = src/sparc/ffi.c src/sparc/v8.S src/sparc/v9.S
-+@ALPHA_TRUE@am__append_12 = src/alpha/ffi.c src/alpha/osf.S
-+@IA64_TRUE@am__append_13 = src/ia64/ffi.c src/ia64/unix.S
-+@M32R_TRUE@am__append_14 = src/m32r/sysv.S src/m32r/ffi.c
-+@M68K_TRUE@am__append_15 = src/m68k/ffi.c src/m68k/sysv.S
-+@M88K_TRUE@am__append_16 = src/m88k/ffi.c src/m88k/obsd.S
-+@MOXIE_TRUE@am__append_17 = src/moxie/ffi.c src/moxie/eabi.S
-+@MICROBLAZE_TRUE@am__append_18 = src/microblaze/ffi.c src/microblaze/sysv.S
-+@NIOS2_TRUE@am__append_19 = src/nios2/sysv.S src/nios2/ffi.c
-+@POWERPC_TRUE@am__append_20 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/ffi_linux64.c src/powerpc/sysv.S src/powerpc/ppc_closure.S src/powerpc/linux64.S src/powerpc/linux64_closure.S
-+@POWERPC_AIX_TRUE@am__append_21 = src/powerpc/ffi_darwin.c src/powerpc/aix.S src/powerpc/aix_closure.S
-+@POWERPC_DARWIN_TRUE@am__append_22 = src/powerpc/ffi_darwin.c src/powerpc/darwin.S src/powerpc/darwin_closure.S
-+@POWERPC_FREEBSD_TRUE@am__append_23 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/sysv.S src/powerpc/ppc_closure.S
-+@AARCH64_TRUE@am__append_24 = src/aarch64/sysv.S src/aarch64/ffi.c
-+@ARC_TRUE@am__append_25 = src/arc/arcompact.S src/arc/ffi.c
-+@ARM_TRUE@am__append_26 = src/arm/sysv.S src/arm/ffi.c
-+@ARM_TRUE@@FFI_EXEC_TRAMPOLINE_TABLE_TRUE@am__append_27 = src/arm/trampoline.S
-+@AVR32_TRUE@am__append_28 = src/avr32/sysv.S src/avr32/ffi.c
-+@LIBFFI_CRIS_TRUE@am__append_29 = src/cris/sysv.S src/cris/ffi.c
-+@FRV_TRUE@am__append_30 = src/frv/eabi.S src/frv/ffi.c
-+@S390_TRUE@am__append_31 = src/s390/sysv.S src/s390/ffi.c
-+@X86_64_TRUE@am__append_32 = src/x86/ffi64.c src/x86/unix64.S src/x86/ffi.c src/x86/sysv.S
-+@SH_TRUE@am__append_33 = src/sh/sysv.S src/sh/ffi.c
-+@SH64_TRUE@am__append_34 = src/sh64/sysv.S src/sh64/ffi.c
-+@PA_LINUX_TRUE@am__append_35 = src/pa/linux.S src/pa/ffi.c
-+@PA_HPUX_TRUE@am__append_36 = src/pa/hpux32.S src/pa/ffi.c
-+@TILE_TRUE@am__append_37 = src/tile/tile.S src/tile/ffi.c
-+@XTENSA_TRUE@am__append_38 = src/xtensa/sysv.S src/xtensa/ffi.c
-+@METAG_TRUE@am__append_39 = src/metag/sysv.S src/metag/ffi.c
-+@VAX_TRUE@am__append_40 = src/vax/elfbsd.S src/vax/ffi.c
+ @FFI_DEBUG_TRUE@am_:append:1 = src/debug.c
+ @MIPS_TRUE@am_:append:2 = src/mips/ffi.c src/mips/o32.S src/mips/n32.S
+-@BFIN_TRUE@am_:append:3 = src/bfin/ffi.c src/bfin/sysv.S
+-@X86_TRUE@am_:append:4 = src/x86/ffi.c src/x86/sysv.S src/x86/win32.S
+-@X86_FREEBSD_TRUE@am_:append:5 = src/x86/ffi.c src/x86/freebsd.S src/x86/win32.S
+-@X86_WIN32_TRUE@am_:append:6 = src/x86/ffi.c src/x86/win32.S
+-@X86_WIN64_TRUE@am_:append:7 = src/x86/ffi.c src/x86/win64.S
+-@X86_DARWIN_TRUE@am_:append:8 = src/x86/ffi.c src/x86/darwin.S src/x86/ffi64.c src/x86/darwin64.S
+-@X86_DARWIN32_TRUE@@X86_DARWIN_TRUE@am_:append:9 = src/x86/win32.S
+-@SPARC_TRUE@am_:append:10 = src/sparc/ffi.c src/sparc/v8.S src/sparc/v9.S
+-@ALPHA_TRUE@am_:append:11 = src/alpha/ffi.c src/alpha/osf.S
+-@IA64_TRUE@am_:append:12 = src/ia64/ffi.c src/ia64/unix.S
+-@M32R_TRUE@am_:append:13 = src/m32r/sysv.S src/m32r/ffi.c
+-@M68K_TRUE@am_:append:14 = src/m68k/ffi.c src/m68k/sysv.S
+-@M88K_TRUE@am_:append:15 = src/m88k/ffi.c src/m88k/obsd.S
+-@MOXIE_TRUE@am_:append:16 = src/moxie/ffi.c src/moxie/eabi.S
+-@MICROBLAZE_TRUE@am_:append:17 = src/microblaze/ffi.c src/microblaze/sysv.S
+-@NIOS2_TRUE@am_:append:18 = src/nios2/sysv.S src/nios2/ffi.c
+-@POWERPC_TRUE@am_:append:19 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/ffi_linux64.c src/powerpc/sysv.S src/powerpc/ppc_closure.S src/powerpc/linux64.S src/powerpc/linux64_closure.S
+-@POWERPC_AIX_TRUE@am_:append:20 = src/powerpc/ffi_darwin.c src/powerpc/aix.S src/powerpc/aix_closure.S
+-@POWERPC_DARWIN_TRUE@am_:append:21 = src/powerpc/ffi_darwin.c src/powerpc/darwin.S src/powerpc/darwin_closure.S
+-@POWERPC_FREEBSD_TRUE@am_:append:22 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/sysv.S src/powerpc/ppc_closure.S
+-@AARCH64_TRUE@am_:append:23 = src/aarch64/sysv.S src/aarch64/ffi.c
+-@ARC_TRUE@am_:append:24 = src/arc/arcompact.S src/arc/ffi.c
+-@ARM_TRUE@am_:append:25 = src/arm/sysv.S src/arm/ffi.c
+-@ARM_TRUE@@FFI_EXEC_TRAMPOLINE_TABLE_TRUE@am_:append:26 = src/arm/trampoline.S
+-@AVR32_TRUE@am_:append:27 = src/avr32/sysv.S src/avr32/ffi.c
+-@LIBFFI_CRIS_TRUE@am_:append:28 = src/cris/sysv.S src/cris/ffi.c
+-@FRV_TRUE@am_:append:29 = src/frv/eabi.S src/frv/ffi.c
+-@S390_TRUE@am_:append:30 = src/s390/sysv.S src/s390/ffi.c
+-@X86_64_TRUE@am_:append:31 = src/x86/ffi64.c src/x86/unix64.S src/x86/ffi.c src/x86/sysv.S
+-@SH_TRUE@am_:append:32 = src/sh/sysv.S src/sh/ffi.c
+-@SH64_TRUE@am_:append:33 = src/sh64/sysv.S src/sh64/ffi.c
+-@PA_LINUX_TRUE@am_:append:34 = src/pa/linux.S src/pa/ffi.c
+-@PA_HPUX_TRUE@am_:append:35 = src/pa/hpux32.S src/pa/ffi.c
+-@TILE_TRUE@am_:append:36 = src/tile/tile.S src/tile/ffi.c
+-@XTENSA_TRUE@am_:append:37 = src/xtensa/sysv.S src/xtensa/ffi.c
+-@METAG_TRUE@am_:append:38 = src/metag/sysv.S src/metag/ffi.c
+-@VAX_TRUE@am_:append:39 = src/vax/elfbsd.S src/vax/ffi.c
++@RISCV_TRUE@am_:append:3 = src/riscv/ffi.c src/riscv/sysv.S
++@BFIN_TRUE@am_:append:4 = src/bfin/ffi.c src/bfin/sysv.S
++@X86_TRUE@am_:append:5 = src/x86/ffi.c src/x86/sysv.S src/x86/win32.S
++@X86_FREEBSD_TRUE@am_:append:6 = src/x86/ffi.c src/x86/freebsd.S src/x86/win32.S
++@X86_WIN32_TRUE@am_:append:7 = src/x86/ffi.c src/x86/win32.S
++@X86_WIN64_TRUE@am_:append:8 = src/x86/ffi.c src/x86/win64.S
++@X86_DARWIN_TRUE@am_:append:9 = src/x86/ffi.c src/x86/darwin.S src/x86/ffi64.c src/x86/darwin64.S
++@X86_DARWIN32_TRUE@@X86_DARWIN_TRUE@am_:append:10 = src/x86/win32.S
++@SPARC_TRUE@am_:append:11 = src/sparc/ffi.c src/sparc/v8.S src/sparc/v9.S
++@ALPHA_TRUE@am_:append:12 = src/alpha/ffi.c src/alpha/osf.S
++@IA64_TRUE@am_:append:13 = src/ia64/ffi.c src/ia64/unix.S
++@M32R_TRUE@am_:append:14 = src/m32r/sysv.S src/m32r/ffi.c
++@M68K_TRUE@am_:append:15 = src/m68k/ffi.c src/m68k/sysv.S
++@M88K_TRUE@am_:append:16 = src/m88k/ffi.c src/m88k/obsd.S
++@MOXIE_TRUE@am_:append:17 = src/moxie/ffi.c src/moxie/eabi.S
++@MICROBLAZE_TRUE@am_:append:18 = src/microblaze/ffi.c src/microblaze/sysv.S
++@NIOS2_TRUE@am_:append:19 = src/nios2/sysv.S src/nios2/ffi.c
++@POWERPC_TRUE@am_:append:20 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/ffi_linux64.c src/powerpc/sysv.S src/powerpc/ppc_closure.S src/powerpc/linux64.S src/powerpc/linux64_closure.S
++@POWERPC_AIX_TRUE@am_:append:21 = src/powerpc/ffi_darwin.c src/powerpc/aix.S src/powerpc/aix_closure.S
++@POWERPC_DARWIN_TRUE@am_:append:22 = src/powerpc/ffi_darwin.c src/powerpc/darwin.S src/powerpc/darwin_closure.S
++@POWERPC_FREEBSD_TRUE@am_:append:23 = src/powerpc/ffi.c src/powerpc/ffi_sysv.c src/powerpc/sysv.S src/powerpc/ppc_closure.S
++@AARCH64_TRUE@am_:append:24 = src/aarch64/sysv.S src/aarch64/ffi.c
++@ARC_TRUE@am_:append:25 = src/arc/arcompact.S src/arc/ffi.c
++@ARM_TRUE@am_:append:26 = src/arm/sysv.S src/arm/ffi.c
++@ARM_TRUE@@FFI_EXEC_TRAMPOLINE_TABLE_TRUE@am_:append:27 = src/arm/trampoline.S
++@AVR32_TRUE@am_:append:28 = src/avr32/sysv.S src/avr32/ffi.c
++@LIBFFI_CRIS_TRUE@am_:append:29 = src/cris/sysv.S src/cris/ffi.c
++@FRV_TRUE@am_:append:30 = src/frv/eabi.S src/frv/ffi.c
++@S390_TRUE@am_:append:31 = src/s390/sysv.S src/s390/ffi.c
++@X86_64_TRUE@am_:append:32 = src/x86/ffi64.c src/x86/unix64.S src/x86/ffi.c src/x86/sysv.S
++@SH_TRUE@am_:append:33 = src/sh/sysv.S src/sh/ffi.c
++@SH64_TRUE@am_:append:34 = src/sh64/sysv.S src/sh64/ffi.c
++@PA_LINUX_TRUE@am_:append:35 = src/pa/linux.S src/pa/ffi.c
++@PA_HPUX_TRUE@am_:append:36 = src/pa/hpux32.S src/pa/ffi.c
++@TILE_TRUE@am_:append:37 = src/tile/tile.S src/tile/ffi.c
++@XTENSA_TRUE@am_:append:38 = src/xtensa/sysv.S src/xtensa/ffi.c
++@METAG_TRUE@am_:append:39 = src/metag/sysv.S src/metag/ffi.c
++@VAX_TRUE@am_:append:40 = src/vax/elfbsd.S src/vax/ffi.c
  # Build debug. Define FFI_DEBUG on the commandline so that, when building with
  # MSVC, it can link against the debug CRT.
--@FFI_DEBUG_TRUE@am__append_40 = -DFFI_DEBUG
-+@FFI_DEBUG_TRUE@am__append_41 = -DFFI_DEBUG
+-@FFI_DEBUG_TRUE@am_:append:40 = -DFFI_DEBUG
++@FFI_DEBUG_TRUE@am_:append:41 = -DFFI_DEBUG
  subdir = .
  DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
  	$(top_srcdir)/configure $(am__configure_deps) \
@@ -898,7 +898,7 @@ diff -rupN libffi-3.1-orig/Makefile.in libffi-3.1/Makefile.in
 +	install-sh missing ltmain.sh
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
  am__aclocal_m4_deps = $(top_srcdir)/m4/asmcfi.m4 \
- 	$(top_srcdir)/m4/ax_append_flag.m4 \
+ 	$(top_srcdir)/m4/ax:append:flag.m4 \
 @@ -189,61 +190,62 @@ am_libffi_la_OBJECTS = src/prep_cif.lo s
  @FFI_DEBUG_TRUE@am__objects_1 = src/debug.lo
  @MIPS_TRUE@am__objects_2 = src/mips/ffi.lo src/mips/o32.lo \
@@ -1051,17 +1051,17 @@ diff -rupN libffi-3.1-orig/Makefile.in libffi-3.1/Makefile.in
  	 src/s390/ffi.c src/s390/sysv.S src/s390/ffitarget.h		\
  	 src/sh/ffi.c src/sh/sysv.S src/sh/ffitarget.h src/sh64/ffi.c	\
  	 src/sh64/sysv.S src/sh64/ffitarget.h src/sparc/v8.S		\
-@@ -714,11 +718,11 @@ nodist_libffi_la_SOURCES = $(am__append_
- 	$(am__append_30) $(am__append_31) $(am__append_32) \
- 	$(am__append_33) $(am__append_34) $(am__append_35) \
- 	$(am__append_36) $(am__append_37) $(am__append_38) \
--	$(am__append_39)
-+	$(am__append_39) $(am__append_40)
+@@ -714,11 +718,11 @@ nodist_libffi_la_SOURCES = $(am_:append:
+ 	$(am_:append:30) $(am_:append:31) $(am_:append:32) \
+ 	$(am_:append:33) $(am_:append:34) $(am_:append:35) \
+ 	$(am_:append:36) $(am_:append:37) $(am_:append:38) \
+-	$(am_:append:39)
++	$(am_:append:39) $(am_:append:40)
  libffi_convenience_la_SOURCES = $(libffi_la_SOURCES)
  nodist_libffi_convenience_la_SOURCES = $(nodist_libffi_la_SOURCES)
  LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/libtool-ldflags $(LDFLAGS))
--AM_CFLAGS = $(am__append_40)
-+AM_CFLAGS = $(am__append_41)
+-AM_CFLAGS = $(am_:append:40)
++AM_CFLAGS = $(am_:append:41)
  libffi_la_LDFLAGS = -no-undefined -version-info `grep -v '^\#' $(srcdir)/libtool-version` $(LTLDFLAGS) $(AM_LTLDFLAGS)
  AM_CPPFLAGS = -I. -I$(top_srcdir)/include -Iinclude -I$(top_srcdir)/src
  AM_CCASFLAGS = $(AM_CPPFLAGS)
