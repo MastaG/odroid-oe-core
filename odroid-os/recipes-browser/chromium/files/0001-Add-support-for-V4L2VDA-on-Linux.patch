@@ -414,7 +414,7 @@ index 1cff2201..89c1de2b 100644
  
    return base::ScopedFD(request_fd);
 +#else
-+  return base::nullopt;
++  return absl::nullopt;
 +#endif
  }
  

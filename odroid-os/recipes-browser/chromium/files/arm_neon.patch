@@ -921,21 +921,6 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.h chromiu
  #define M(st) +1
      // We can't necessarily express the type of SkJumper stage functions here,
      // so we just use this void(*)(void) as a stand-in.
---- chromium-92.0.4515.107.orig/third_party/skia/include/core/SkSpan.h	2021-07-19 20:47:29.000000000 +0200
-+++ chromium-92.0.4515.107/third_party/skia/include/core/SkSpan.h	2021-08-17 13:42:33.033536169 +0200
-@@ -76,9 +76,9 @@
-     return SkSpan<T>{p, SkTo<size_t>(s)};
- }
- 
--template <size_t N, typename T> inline constexpr SkSpan<T> SkMakeSpan(T (&a)[N]) {
--    return SkSpan<T>{a, N};
--}
-+// template <size_t N, typename T> inline constexpr SkSpan<T> SkMakeSpan(T (&a)[N]) {
-+//    return SkSpan<T>{a, N};
-+// }
- 
- template <typename Container>
- inline auto SkMakeSpan(Container& c)
 diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h
 --- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-13 01:03:40.000000000 +0100
 +++ chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-31 23:16:06.854061704 +0200
@@ -1569,7 +1554,7 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.
 +
 +/// Macro to do "over" compositing blending on 8 32bpp premultiplied ARGB source and 8 8-bit alpha mask pixels
 +/// which are with either translucent or a mixture of opaque and transparent.
-+/// Relies on A(x) to determine whether to emit code in ARM state (as opposed to Thumb state).
++/// Relies on ARM_TARGET_A(x) to determine whether to emit code in ARM state (as opposed to Thumb state).
 +/// @arg align           bit-alignment specifier on destination loads/stores (optional)
 +/// @arg if_loadstore    YES or NO: whether to do load/store of destination
 +/// @arg if_preload      YES or NO: whether to insert prefetch instructions
@@ -1727,9 +1712,8 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.
  }  // namespace SK_OPTS_NS
  
  #endif//SkBlitMask_opts_DEFINED
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkBlitRow_opts.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/opts/SkBlitRow_opts.h	2021-03-31 23:16:06.855061724 +0200
+--- chromium-92.0.4515.107.orig/third_party/skia/src/opts/SkBlitRow_opts.h	2021-07-19 20:47:30.000000000 +0200
++++ chromium-92.0.4515.107/third_party/skia/src/opts/SkBlitRow_opts.h	2021-08-17 15:40:29.215533579 +0200
 @@ -120,6 +120,10 @@
  #endif
  
@@ -1750,11 +1734,11 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h
 +
 +// Macros to specify instructions to only include if targeting ARM or Thumb instruction sets
 +#ifdef __thumb__
-+#define A(x)
-+#define T(x) x
++#define ARM_TARGET_A(x)
++#define ARM_TARGET_T(x) x
 +#else
-+#define A(x) x
-+#define T(x)
++#define ARM_TARGET_A(x) x
++#define ARM_TARGET_T(x)
 +#endif
 +
 +// These macros permit optionally-included features to be switched using a parameter to another macro
@@ -1889,7 +1873,7 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h
 +
 +/// Macro to do "over" compositing blending on 8 32bpp premultiplied ARGB pixels
 +/// which are with either translucent or a mixture of opaque and transparent.
-+/// Relies on A(x) to determine whether to emit code in ARM state (as opposed to Thumb state).
++/// Relies on ARM_TARGET_A(x) to determine whether to emit code in ARM state (as opposed to Thumb state).
 +/// @arg align           bit-alignment specifier on destination loads/stores (optional)
 +/// @arg other_src_alpha D-register specifier for alpha source in other bank (only IF_OVERLAP)
 +/// @arg src0            Q-register specifier for blue/green source in this bank
@@ -1922,9 +1906,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h
 +                "vraddhn.u16 d19, q11, q15                                                    \n\t"   \
 +if_overlap(     "mvn         %[tmp], %[alo]                                                   \n\t")  \
 +if_overlap(     "vmvn        d31, "#other_src_alpha"                                          \n\t")  \
-+if_overlap(A(   "orr         %[alo], %[ahi]                                                   \n\t")) \
++if_overlap(ARM_TARGET_A(   "orr         %[alo], %[ahi]                                                   \n\t")) \
 +                "vadd.i8     "#src0", q8                                                      \n\t"   \
-+if_overlap(A(   "mvn         %[ahi], %[ahi]                                                   \n\t")) \
++if_overlap(ARM_TARGET_A(   "mvn         %[ahi], %[ahi]                                                   \n\t")) \
 +                "vadd.i8     "#src1", q9                                                      \n\t"   \
 +                opt"                                                                          \n\t"   \
 +if_loadstore(   "vst4.8      {"#src0", "#src1"}, [%[dst]"#align"]!                            \n\t")  \
@@ -2049,12 +2033,12 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h
 +                // Mixed or translucent pixels in d0-d3
 +                "30:                                                                          \n\t"
 +                S32A_OPAQUE_8PIX_BLEND(:128, d7, q0, q1,, YES, YES, IF_PRELOAD)
-+A(              "teq         %[alo], #0                                                       \n\t")
-+T(              "orrs        %[alo], %[alo], %[ahi]                                           \n\t")
++ARM_TARGET_A(              "teq         %[alo], #0                                                       \n\t")
++ARM_TARGET_T(              "orrs        %[alo], %[alo], %[ahi]                                           \n\t")
 +                "vld4.8      {d0-d3}, [%[src]]!                                               \n\t"
 +                "beq         29b                                                              \n\t"
-+A(              "orrs        %[tmp], %[tmp], %[ahi]                                           \n\t")
-+T(              "orns        %[tmp], %[tmp], %[ahi]                                           \n\t")
++ARM_TARGET_A(              "orrs        %[tmp], %[tmp], %[ahi]                                           \n\t")
++ARM_TARGET_T(              "orns        %[tmp], %[tmp], %[ahi]                                           \n\t")
 +                "bne         40f                                                              \n\t"
 +                "vst4.8      {d4-d7}, [%[dst]:128]                                            \n\t"
 +                "b           29b                                                              \n\t"
@@ -2064,12 +2048,12 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitRow_opts.h
 +                S32A_OPAQUE_8PIX_BLEND(:128, d3, q2, q3, \
 +                "subs        %[len], #16", YES, YES, NO)
 +                "bcc         50f                                                              \n\t"
-+A(              "teq         %[alo], #0                                                       \n\t")
-+T(              "orrs        %[alo], %[alo], %[ahi]                                           \n\t")
++ARM_TARGET_A(              "teq         %[alo], #0                                                       \n\t")
++ARM_TARGET_T(              "orrs        %[alo], %[alo], %[ahi]                                           \n\t")
 +                "vld4.8      {d4-d7}, [%[src]]!                                               \n\t"
 +                "beq         19b                                                              \n\t"
-+A(              "orrs        %[tmp], %[tmp], %[ahi]                                           \n\t")
-+T(              "orns        %[tmp], %[tmp], %[ahi]                                           \n\t")
++ARM_TARGET_A(              "orrs        %[tmp], %[tmp], %[ahi]                                           \n\t")
++ARM_TARGET_T(              "orns        %[tmp], %[tmp], %[ahi]                                           \n\t")
 +                "bne         30b                                                              \n\t"
 +                "vst4.8      {d0-d3}, [%[dst]:128]                                            \n\t"
 +                "b           19b                                                              \n\t"
