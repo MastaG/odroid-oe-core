@@ -921,18 +921,21 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.h chromiu
  #define M(st) +1
      // We can't necessarily express the type of SkJumper stage functions here,
      // so we just use this void(*)(void) as a stand-in.
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkSpan.h chromium-89.0.4389.90/third_party/skia/src/core/SkSpan.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkSpan.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkSpan.h	2021-03-31 23:16:06.854061704 +0200
-@@ -23,7 +23,7 @@
-     template <typename U, typename = typename std::enable_if<std::is_same<const U, T>::value>::type>
-     constexpr SkSpan(const SkSpan<U>& that) : fPtr(that.data()), fSize{that.size()} {}
-     constexpr SkSpan(const SkSpan& o) = default;
--    template<size_t N> constexpr SkSpan(T(&a)[N]) : SkSpan{a, N} { }
-+//    template<size_t N> constexpr SkSpan(T(&a)[N]) : SkSpan{a, N} { }
-     template<typename Container>
-     constexpr SkSpan(Container& c) : SkSpan{skstd::data(c), skstd::size(c)} { }
+--- chromium-92.0.4515.107.orig/third_party/skia/include/core/SkSpan.h	2021-07-19 20:47:29.000000000 +0200
++++ chromium-92.0.4515.107/third_party/skia/include/core/SkSpan.h	2021-08-17 13:42:33.033536169 +0200
+@@ -76,9 +76,9 @@
+     return SkSpan<T>{p, SkTo<size_t>(s)};
+ }
  
+-template <size_t N, typename T> inline constexpr SkSpan<T> SkMakeSpan(T (&a)[N]) {
+-    return SkSpan<T>{a, N};
+-}
++// template <size_t N, typename T> inline constexpr SkSpan<T> SkMakeSpan(T (&a)[N]) {
++//    return SkSpan<T>{a, N};
++// }
+ 
+ template <typename Container>
+ inline auto SkMakeSpan(Container& c)
 diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h
 --- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-13 01:03:40.000000000 +0100
 +++ chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-31 23:16:06.854061704 +0200

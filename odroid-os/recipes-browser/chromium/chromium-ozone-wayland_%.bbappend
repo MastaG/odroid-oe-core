@@ -1,19 +1,27 @@
 REQUIRED_DISTRO_FEATURES = "x11"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI_append += " \
+SRC_URI:append += " \
 	file://enable-chromecast-by-default.patch \
 	file://ffmpeg_chromium.patch \
 	file://add_GL_RGB_YCRCB_420_CHROMIUM.patch \
 	file://widevine.patch \
 	file://arm_neon.patch \
-	file://0005-cld3-Avoid-unaligned-accesses.patch \
 	file://angle_gl_enable_when_ozone_wl.patch \
-	file://fix-crash-in-ThemeService.patch \
 	file://extend-enable-accelerated-video-decode-flag.patch \
 	file://sql-make-VirtualCursor-standard-layout-type.patch \
-	file://fix-harfbuzz-supp-size.patch \
-	file://fix-ruy-numeric-limits.patch \
+	file://0001-Add-support-for-V4L2VDA-on-Linux.patch \
+	file://0002-Add-mmap-via-libv4l-to-generic_v4l2_device.patch \
+	file://0003-media-capture-linux-Support-libv4l2-plugins.patch \
+	file://0004-media-Enable-mojo-media-when-using-v4l2-codec-on-des.patch \
+	file://0005-cld3-Avoid-unaligned-accesses.patch \
+	file://0006-media-gpu-v4l2-Use-POLLIN-for-pending-event.patch \
+	file://0007-media-capture-linux-Prefer-using-the-first-device.patch \
+	file://0008-media-gpu-v4l2-Fix-compile-error-when-ozone-not-enab.patch \
+	file://0009-ui-events-ozone-Define-SW_PEN_INSERTED-for-old-kerne.patch \
+	file://0010-Create-new-fence-when-there-s-no-in-fences.patch \
+	file://0011-HACK-ozone-wayland-Force-disable-implicit-external-s.patch \
+	file://0012-HACK-media-capture-linux-Allow-camera-without-suppor.patch \
 "
 
 
@@ -66,6 +74,9 @@ GN_ARGS += " \
  arm_optionally_use_neon=false \
  use_gtk=true \
  use_glib=true \
+ use_v4l2_codec=true \
+ use_v4lplugin=true \
+ use_linux_v4l2_only=true \
 "
 
-CHROMIUM_EXTRA_ARGS_append = " --no-sandbox --gpu-sandbox-start-early --ignore-gpu-blocklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 --enable-accelerated-video-decode"
+CHROMIUM_EXTRA_ARGS:append = " --no-sandbox --gpu-sandbox-start-early --ignore-gpu-blocklist --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096 --enable-accelerated-video-decode"
