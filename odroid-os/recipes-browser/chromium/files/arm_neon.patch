@@ -1,6 +1,6 @@
-diff -Naur chromium-89.0.4389.90.orig/native_client/src/include/concurrency_ops.h chromium-89.0.4389.90/native_client/src/include/concurrency_ops.h
---- chromium-89.0.4389.90.orig/native_client/src/include/concurrency_ops.h	2021-03-13 01:03:31.000000000 +0100
-+++ chromium-89.0.4389.90/native_client/src/include/concurrency_ops.h	2021-03-31 23:25:45.669941586 +0200
+diff -Naur a/native_client/src/include/concurrency_ops.h b/native_client/src/include/concurrency_ops.h
+--- a/native_client/src/include/concurrency_ops.h	2021-10-29 05:09:18.000000000 +0200
++++ b/native_client/src/include/concurrency_ops.h	2021-11-16 22:48:32.603567728 +0100
 @@ -32,14 +32,13 @@
  #elif NACL_ARCH(NACL_BUILD_ARCH) == NACL_arm
  
@@ -21,10 +21,10 @@ diff -Naur chromium-89.0.4389.90.orig/native_client/src/include/concurrency_ops.
  }
  
  #elif NACL_ARCH(NACL_BUILD_ARCH) == NACL_mips
-diff -Naur chromium-89.0.4389.90.orig/third_party/libyuv/BUILD.gn chromium-89.0.4389.90/third_party/libyuv/BUILD.gn
---- chromium-89.0.4389.90.orig/third_party/libyuv/BUILD.gn	2021-03-13 01:03:37.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/libyuv/BUILD.gn	2021-03-31 23:16:06.853061686 +0200
-@@ -208,6 +208,11 @@
+diff -Naur a/third_party/libyuv/BUILD.gn b/third_party/libyuv/BUILD.gn
+--- a/third_party/libyuv/BUILD.gn	2021-10-29 05:09:25.000000000 +0200
++++ b/third_party/libyuv/BUILD.gn	2021-11-16 22:48:32.603567728 +0100
+@@ -209,6 +209,11 @@
  
      if (current_cpu != "arm64") {
        configs -= [ "//build/config/compiler:compiler_arm_fpu" ]
@@ -36,9 +36,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/libyuv/BUILD.gn chromium-89.0.
        cflags = [ "-mfpu=neon" ]
      }
    }
-diff -Naur chromium-89.0.4389.90.orig/third_party/libyuv/source/cpu_id.cc chromium-89.0.4389.90/third_party/libyuv/source/cpu_id.cc
---- chromium-89.0.4389.90.orig/third_party/libyuv/source/cpu_id.cc	2021-03-13 01:03:37.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/libyuv/source/cpu_id.cc	2021-03-31 23:16:06.853061686 +0200
+diff -Naur a/third_party/libyuv/source/cpu_id.cc b/third_party/libyuv/source/cpu_id.cc
+--- a/third_party/libyuv/source/cpu_id.cc	2021-10-29 05:09:25.000000000 +0200
++++ b/third_party/libyuv/source/cpu_id.cc	2021-11-16 22:52:11.187346586 +0100
 @@ -133,6 +133,18 @@
  #pragma optimize("g", on)
  #endif
@@ -55,7 +55,7 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/libyuv/source/cpu_id.cc chromi
 +  return ((auxval & HWCAP_ARM_NEON) != 0 ? kCpuHasNEON : 0);
 +}
 +#else
- // based on libvpx arm_cpudetect.c
+ // Based on libvpx arm_cpudetect.c
  // For Arm, but public to allow testing on any CPU
  LIBYUV_API SAFEBUFFERS int ArmCpuCaps(const char* cpuinfo_name) {
 @@ -161,6 +173,7 @@
@@ -66,9 +66,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/libyuv/source/cpu_id.cc chromi
  
  // TODO(fbarchard): Consider read_msa_ir().
  LIBYUV_API SAFEBUFFERS int MipsCpuCaps(const char* cpuinfo_name) {
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcState.cpp chromium-89.0.4389.90/third_party/skia/src/core/SkBitmapProcState.cpp
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcState.cpp	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkBitmapProcState.cpp	2021-03-31 23:32:09.241856844 +0200
+diff -Naur a/third_party/skia/src/core/SkBitmapProcState.cpp b/third_party/skia/src/core/SkBitmapProcState.cpp
+--- a/third_party/skia/src/core/SkBitmapProcState.cpp	2021-10-29 05:09:29.000000000 +0200
++++ b/third_party/skia/src/core/SkBitmapProcState.cpp	2021-11-16 22:48:32.603567728 +0100
 @@ -19,6 +19,7 @@
  #include "src/core/SkResourceCache.h"
  #include "src/core/SkUtils.h"
@@ -291,9 +291,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcStat
      } else {
          fSampleProc32 = fBilerp ? SkOpts::S32_alpha_D32_filter_DXDY : S32_alpha_D32_nofilter_DXDY;
      }
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp chromium-89.0.4389.90/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp	2021-03-31 23:16:06.854061704 +0200
+diff -Naur a/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp b/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp
+--- a/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp	2021-10-29 05:09:29.000000000 +0200
++++ b/third_party/skia/src/core/SkBitmapProcState_matrixProcs.cpp	2021-11-16 22:48:32.603567728 +0100
 @@ -247,6 +247,535 @@
      return SkTPin(fx >> 16, 0, max);
  }
@@ -840,9 +840,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBitmapProcStat
  static const SkBitmapProcState::MatrixProc MirrorX_MirrorY_Procs[] = {
      nofilter_scale <mirror, mirror,  false>, filter_scale <mirror, mirror, extract_low_bits_general, false>,
      nofilter_affine<mirror, mirror>,         filter_affine<mirror, mirror, extract_low_bits_general>,
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBlitter_ARGB32.cpp chromium-89.0.4389.90/third_party/skia/src/core/SkBlitter_ARGB32.cpp
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBlitter_ARGB32.cpp	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkBlitter_ARGB32.cpp	2021-03-31 23:16:06.854061704 +0200
+diff -Naur a/third_party/skia/src/core/SkBlitter_ARGB32.cpp b/third_party/skia/src/core/SkBlitter_ARGB32.cpp
+--- a/third_party/skia/src/core/SkBlitter_ARGB32.cpp	2021-10-29 05:09:29.000000000 +0200
++++ b/third_party/skia/src/core/SkBlitter_ARGB32.cpp	2021-11-16 22:48:32.603567728 +0100
 @@ -11,6 +11,7 @@
  #include "src/core/SkCoreBlitters.h"
  #include "src/core/SkUtils.h"
@@ -877,9 +877,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkBlitter_ARGB32
          } else if (mask.fFormat == SkMask::kLCD16_Format && opaque) {
              blend_row = blend_row_LCD16_opaque;
          } else if (mask.fFormat == SkMask::kLCD16_Format) {
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.cpp chromium-89.0.4389.90/third_party/skia/src/core/SkOpts.cpp
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.cpp	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkOpts.cpp	2021-03-31 23:16:06.854061704 +0200
+diff -Naur a/third_party/skia/src/core/SkOpts.cpp b/third_party/skia/src/core/SkOpts.cpp
+--- a/third_party/skia/src/core/SkOpts.cpp	2021-10-29 05:09:29.000000000 +0200
++++ b/third_party/skia/src/core/SkOpts.cpp	2021-11-16 22:48:32.603567728 +0100
 @@ -58,6 +58,7 @@
      DEFINE_DEFAULT(create_xfermode);
  
@@ -900,9 +900,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.cpp chrom
  #undef DEFINE_DEFAULT
  
  #define M(st) (StageFn)SK_OPTS_NS::st,
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.h chromium-89.0.4389.90/third_party/skia/src/core/SkOpts.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/core/SkOpts.h	2021-03-31 23:16:06.854061704 +0200
+diff -Naur a/third_party/skia/src/core/SkOpts.h b/third_party/skia/src/core/SkOpts.h
+--- a/third_party/skia/src/core/SkOpts.h	2021-10-29 05:09:29.000000000 +0200
++++ b/third_party/skia/src/core/SkOpts.h	2021-11-16 22:48:32.603567728 +0100
 @@ -29,6 +29,7 @@
  
      extern void (*blit_mask_d32_a8)(SkPMColor*, size_t, const SkAlpha*, size_t, SkColor, int, int);
@@ -921,9 +921,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/core/SkOpts.h chromiu
  #define M(st) +1
      // We can't necessarily express the type of SkJumper stage functions here,
      // so we just use this void(*)(void) as a stand-in.
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-03-31 23:16:06.854061704 +0200
+diff -Naur a/third_party/skia/src/opts/SkBitmapProcState_opts.h b/third_party/skia/src/opts/SkBitmapProcState_opts.h
+--- a/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-10-29 05:09:30.000000000 +0200
++++ b/third_party/skia/src/opts/SkBitmapProcState_opts.h	2021-11-16 22:48:32.603567728 +0100
 @@ -387,6 +387,257 @@
          }
      }
@@ -1386,9 +1386,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBitmapProcStat
  }  // namespace SK_OPTS_NS
  
  #endif
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkBlitMask_opts.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/opts/SkBlitMask_opts.h	2021-03-31 23:16:06.855061724 +0200
+diff -Naur a/third_party/skia/src/opts/SkBlitMask_opts.h b/third_party/skia/src/opts/SkBlitMask_opts.h
+--- a/third_party/skia/src/opts/SkBlitMask_opts.h	2021-10-29 05:09:30.000000000 +0200
++++ b/third_party/skia/src/opts/SkBlitMask_opts.h	2021-11-16 22:48:32.605567763 +0100
 @@ -226,6 +226,322 @@
      }
  }
@@ -1712,8 +1712,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.
  }  // namespace SK_OPTS_NS
  
  #endif//SkBlitMask_opts_DEFINED
---- chromium-92.0.4515.107.orig/third_party/skia/src/opts/SkBlitRow_opts.h	2021-07-19 20:47:30.000000000 +0200
-+++ chromium-92.0.4515.107/third_party/skia/src/opts/SkBlitRow_opts.h	2021-08-17 15:40:29.215533579 +0200
+diff -Naur a/third_party/skia/src/opts/SkBlitRow_opts.h b/third_party/skia/src/opts/SkBlitRow_opts.h
+--- a/third_party/skia/src/opts/SkBlitRow_opts.h	2021-10-29 05:09:30.000000000 +0200
++++ b/third_party/skia/src/opts/SkBlitRow_opts.h	2021-11-16 22:48:32.605567763 +0100
 @@ -120,6 +120,10 @@
  #endif
  
@@ -2085,9 +2086,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkBlitMask_opts.
  #endif
  
      while (len --> 0) {
-diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkUtils_opts.h chromium-89.0.4389.90/third_party/skia/src/opts/SkUtils_opts.h
---- chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkUtils_opts.h	2021-03-13 01:03:40.000000000 +0100
-+++ chromium-89.0.4389.90/third_party/skia/src/opts/SkUtils_opts.h	2021-03-31 23:16:06.855061724 +0200
+diff -Naur a/third_party/skia/src/opts/SkUtils_opts.h b/third_party/skia/src/opts/SkUtils_opts.h
+--- a/third_party/skia/src/opts/SkUtils_opts.h	2021-10-29 05:09:30.000000000 +0200
++++ b/third_party/skia/src/opts/SkUtils_opts.h	2021-11-16 22:48:32.605567763 +0100
 @@ -34,7 +34,81 @@
          memsetT(buffer, value, count);
      }
@@ -2170,9 +2171,9 @@ diff -Naur chromium-89.0.4389.90.orig/third_party/skia/src/opts/SkUtils_opts.h c
      }
      /*not static*/ inline void memset64(uint64_t buffer[], uint64_t value, int count) {
          memsetT(buffer, value, count);
-diff -Naur chromium-89.0.4389.90.orig/tools/v8_context_snapshot/v8_context_snapshot.gni chromium-89.0.4389.90/tools/v8_context_snapshot/v8_context_snapshot.gni
---- chromium-89.0.4389.90.orig/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-03-13 00:57:47.000000000 +0100
-+++ chromium-89.0.4389.90/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-03-31 23:24:25.772243070 +0200
+diff -Naur a/tools/v8_context_snapshot/v8_context_snapshot.gni b/tools/v8_context_snapshot/v8_context_snapshot.gni
+--- a/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-10-29 05:07:47.000000000 +0200
++++ b/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-11-16 22:48:32.605567763 +0100
 @@ -11,6 +11,7 @@
  import("//build/config/chromeos/ui_mode.gni")
  import("//build/config/v8_target_cpu.gni")
@@ -2181,7 +2182,7 @@ diff -Naur chromium-89.0.4389.90.orig/tools/v8_context_snapshot/v8_context_snaps
  
  declare_args() {
    # TODO(crbug.com/764576): Enable the feature on more environments.
-@@ -30,7 +31,11 @@
+@@ -31,7 +32,11 @@
        v8_context_snapshot_filename = "v8_context_snapshot.arm64.bin"
      }
    } else {
