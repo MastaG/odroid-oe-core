@@ -14,7 +14,7 @@ diff --git a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc b/ui/ozone
 index 81d1fddb..3b4fcc26 100644
 --- a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
 +++ b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-@@ -21,6 +21,12 @@ namespace ui {
+@@ -23,6 +23,12 @@
  
  namespace {
  
@@ -27,7 +27,7 @@ index 81d1fddb..3b4fcc26 100644
  void WaitForGpuFences(std::vector<std::unique_ptr<gfx::GpuFence>> fences) {
    for (auto& fence : fences)
      fence->Wait();
-@@ -120,14 +126,25 @@ void GbmSurfacelessWayland::SwapBuffersAsync(
+@@ -124,14 +130,25 @@
      return;
    }
  

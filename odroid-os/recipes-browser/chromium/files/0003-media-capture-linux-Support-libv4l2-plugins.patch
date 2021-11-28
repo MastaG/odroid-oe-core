@@ -1,21 +1,6 @@
-From 774533b06cfbbca1425fca49cf4727ecfc6a1492 Mon Sep 17 00:00:00 2001
-From: Jeffy Chen <jeffy.chen@rock-chips.com>
-Date: Mon, 1 Jul 2019 10:37:35 +0800
-Subject: [PATCH 03/12] media: capture: linux: Support libv4l2 plugins
-
-Allow using libv4l2 plugins for linux v4l2 capture devices.
-
-Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
----
- media/capture/BUILD.gn                        | 14 +++++
- .../video/linux/v4l2_capture_device_impl.cc   | 52 ++++++++++++++++++-
- .../video/linux/v4l2_capture_device_impl.h    | 11 ++++
- 3 files changed, 76 insertions(+), 1 deletion(-)
-
-diff --git a/media/capture/BUILD.gn b/media/capture/BUILD.gn
-index bd8a26a1..39e3192e 100644
---- a/media/capture/BUILD.gn
-+++ b/media/capture/BUILD.gn
+diff -Naur a/media/capture/BUILD.gn b/media/capture/BUILD.gn
+--- a/media/capture/BUILD.gn	2021-10-29 05:07:20.000000000 +0200
++++ b/media/capture/BUILD.gn	2021-11-17 13:00:12.305045885 +0100
 @@ -2,6 +2,7 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
@@ -24,7 +9,7 @@ index bd8a26a1..39e3192e 100644
  import("//build/config/chromeos/ui_mode.gni")
  import("//build/config/features.gni")
  import("//build/config/ui.gni")
-@@ -18,6 +19,14 @@ group("capture") {
+@@ -18,6 +19,14 @@
    ]
  }
  
@@ -39,7 +24,7 @@ index bd8a26a1..39e3192e 100644
  component("capture_switches") {
    defines = [ "CAPTURE_IMPLEMENTATION" ]
    sources = [
-@@ -273,6 +282,11 @@ component("capture_lib") {
+@@ -267,6 +276,11 @@
        "video/linux/video_capture_device_linux.cc",
        "video/linux/video_capture_device_linux.h",
      ]
@@ -51,10 +36,9 @@ index bd8a26a1..39e3192e 100644
    }
  
    if (is_chromeos_ash) {
-diff --git a/media/capture/video/linux/v4l2_capture_device_impl.cc b/media/capture/video/linux/v4l2_capture_device_impl.cc
-index c9040f5d..d05d1179 100644
---- a/media/capture/video/linux/v4l2_capture_device_impl.cc
-+++ b/media/capture/video/linux/v4l2_capture_device_impl.cc
+diff -Naur a/media/capture/video/linux/v4l2_capture_device_impl.cc b/media/capture/video/linux/v4l2_capture_device_impl.cc
+--- a/media/capture/video/linux/v4l2_capture_device_impl.cc	2021-10-29 05:07:20.000000000 +0200
++++ b/media/capture/video/linux/v4l2_capture_device_impl.cc	2021-11-17 13:00:12.305045885 +0100
 @@ -10,19 +10,61 @@
  #include <sys/poll.h>
  #include <unistd.h>
@@ -118,7 +102,7 @@ index c9040f5d..d05d1179 100644
    return ::ioctl(fd, request, argp);
  }
  
-@@ -32,10 +74,18 @@ void* V4L2CaptureDeviceImpl::mmap(void* start,
+@@ -32,10 +74,18 @@
                                    int flags,
                                    int fd,
                                    off_t offset) {
@@ -137,10 +121,9 @@ index c9040f5d..d05d1179 100644
    return ::munmap(start, length);
  }
  
-diff --git a/media/capture/video/linux/v4l2_capture_device_impl.h b/media/capture/video/linux/v4l2_capture_device_impl.h
-index 936c8b09..f96c2d43 100644
---- a/media/capture/video/linux/v4l2_capture_device_impl.h
-+++ b/media/capture/video/linux/v4l2_capture_device_impl.h
+diff -Naur a/media/capture/video/linux/v4l2_capture_device_impl.h b/media/capture/video/linux/v4l2_capture_device_impl.h
+--- a/media/capture/video/linux/v4l2_capture_device_impl.h	2021-10-29 05:07:20.000000000 +0200
++++ b/media/capture/video/linux/v4l2_capture_device_impl.h	2021-11-17 13:00:12.305045885 +0100
 @@ -8,6 +8,7 @@
  #include <poll.h>
  #include <sys/fcntl.h>
@@ -149,7 +132,7 @@ index 936c8b09..f96c2d43 100644
  #include "media/capture/capture_export.h"
  #include "media/capture/video/linux/v4l2_capture_device.h"
  
-@@ -17,6 +18,8 @@ namespace media {
+@@ -17,6 +18,8 @@
  // V4L2 APIs.
  class CAPTURE_EXPORT V4L2CaptureDeviceImpl : public V4L2CaptureDevice {
   public:
@@ -158,7 +141,7 @@ index 936c8b09..f96c2d43 100644
    int open(const char* device_name, int flags) override;
    int close(int fd) override;
    int ioctl(int fd, int request, void* argp) override;
-@@ -32,6 +35,14 @@ class CAPTURE_EXPORT V4L2CaptureDeviceImpl : public V4L2CaptureDevice {
+@@ -32,6 +35,14 @@
  
   private:
    ~V4L2CaptureDeviceImpl() override;
@@ -173,6 +156,3 @@ index 936c8b09..f96c2d43 100644
  };
  
  }  // namespace media
--- 
-2.20.1
-
