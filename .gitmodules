@@ -10,9 +10,6 @@
 [submodule "meta-openembedded"]
 	path = meta-openembedded
 	url = https://github.com/openembedded/meta-openembedded.git
-[submodule "meta-rust"]
-	path = meta-rust
-	url = https://github.com/meta-rust/meta-rust.git
 [submodule "meta-clang"]
 	path = meta-clang
 	url = https://github.com/kraj/meta-clang.git
