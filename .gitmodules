@@ -13,9 +13,6 @@
 [submodule "meta-rust"]
 	path = meta-rust
 	url = https://github.com/meta-rust/meta-rust.git
-[submodule "meta-browser"]
-	path = meta-browser
-	url = https://github.com/OSSystems/meta-browser.git
 [submodule "meta-clang"]
 	path = meta-clang
 	url = https://github.com/kraj/meta-clang.git
