@@ -51,6 +51,7 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-openembedded/meta-webserver \
 	$(CURDIR)/meta-openembedded/meta-perl \
 	$(CURDIR)/meta-openembedded/meta-initramfs \
+	$(CURDIR)/meta-openembedded/meta-gnome \
 	$(CURDIR)/openembedded-core/meta \
 	$(CURDIR)/odroid-os \
 	$(CURDIR)/meta-odroid \
@@ -58,7 +59,6 @@ BBLAYERS ?= \
 	$(CURDIR)/meta-local \
 	$(CURDIR)/meta-qt5 \
 	$(CURDIR)/meta-selinux \
-	$(CURDIR)/meta-python2 \
 	$(CURDIR)/meta-clang \
 
 CONFFILES = \
@@ -111,11 +111,11 @@ initialize: init
 init: $(BBLAYERS) $(CONFFILES)
 
 image: init
-	@echo 'Building image for $(MACHINE)$(DMTYPE)'
+	@echo 'Building image for $(MACHINE)'
 	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake odroid-os-image
 
 feed: init
-	@echo 'Building feed for $(MACHINE)$(DMTYPE)'
+	@echo 'Building feed for $(MACHINE)'
 	@. $(TOPDIR)/env.source && cd $(TOPDIR) && bitbake odroid-os-feed
 
 update:
@@ -142,7 +142,7 @@ BITBAKE_ENV_HASH := $(call hash, \
 
 $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'Generating $@'
-	@echo 'export BB_ENV_EXTRAWHITE="MACHINE DMTYPE"' > $@
+	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE"' > $@
 	@echo 'export MACHINE' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
 

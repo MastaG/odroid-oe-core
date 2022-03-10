@@ -2171,27 +2171,3 @@ diff -Naur a/third_party/skia/src/opts/SkUtils_opts.h b/third_party/skia/src/opt
      }
      /*not static*/ inline void memset64(uint64_t buffer[], uint64_t value, int count) {
          memsetT(buffer, value, count);
-diff -Naur a/tools/v8_context_snapshot/v8_context_snapshot.gni b/tools/v8_context_snapshot/v8_context_snapshot.gni
---- a/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-10-29 05:07:47.000000000 +0200
-+++ b/tools/v8_context_snapshot/v8_context_snapshot.gni	2021-11-16 22:48:32.605567763 +0100
-@@ -11,6 +11,7 @@
- import("//build/config/chromeos/ui_mode.gni")
- import("//build/config/v8_target_cpu.gni")
- import("//v8/gni/v8.gni")
-+import("//build/config/arm.gni")
- 
- declare_args() {
-   # TODO(crbug.com/764576): Enable the feature on more environments.
-@@ -31,7 +32,11 @@
-       v8_context_snapshot_filename = "v8_context_snapshot.arm64.bin"
-     }
-   } else {
--    v8_context_snapshot_filename = "v8_context_snapshot.bin"
-+    if (arm_use_neon) {
-+      v8_context_snapshot_filename = "v8_context_snapshot_v7.bin"
-+    } else {
-+      v8_context_snapshot_filename = "v8_context_snapshot.bin"
-+    }
-   }
- }
- 

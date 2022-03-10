@@ -1,0 +1,19 @@
+diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
+index 3d076ac83e..040b904d50 100644
+--- a/ui/gfx/linux/gbm_wrapper.cc
++++ b/ui/gfx/linux/gbm_wrapper.cc
+@@ -324,8 +324,12 @@ class Device final : public ui::GbmDevice {
+     struct gbm_bo* bo = gbm_bo_create_with_modifiers(
+         device_, size.width(), size.height(), format, modifiers.data(),
+         modifiers.size());
+-    if (!bo)
+-      return nullptr;
++    if (!bo) {
++      // Fallback to bo without modifiers
++         LOG(ERROR) << "Failed to create scanout buffer";
++         LOG(INFO) << "Trying to fallback to standard buffer without modifiers";
++      return CreateBuffer(format, size, flags);
++    }
+
+     return CreateBufferForBO(bo, format, size, flags);
+   }

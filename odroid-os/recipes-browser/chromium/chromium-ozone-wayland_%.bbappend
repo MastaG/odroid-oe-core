@@ -1,7 +1,7 @@
 REQUIRED_DISTRO_FEATURES = "x11"
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += "\
+SRC_URI:append = "\
         file://0001-Add-support-for-V4L2VDA-on-Linux.patch \
         file://0002-Add-mmap-via-libv4l-to-generic_v4l2_device.patch \
         file://0003-media-capture-linux-Support-libv4l2-plugins.patch \
@@ -14,18 +14,16 @@ SRC_URI:append += "\
         file://0010-Create-new-fence-when-there-s-no-in-fences.patch \
         file://0011-HACK-ozone-wayland-Force-disable-implicit-external-s.patch \
         file://0012-HACK-media-capture-linux-Allow-camera-without-suppor.patch \
-        file://add_GL_RGB_YCRCB_420_CHROMIUM.patch \
+	file://0014-blink-rtc-Force-disabling-optimized-video-scaling.patch \
         file://widevine.patch \
         file://arm_neon.patch \
         file://unexpire-accelerated-video-decode-flag.patch;striplevel=0 \
         file://use-oauth2-client-switches-as-default.patch \
-        file://angle_gl_enable_when_ozone_wl.patch \
-	file://sql-make-VirtualCursor-standard-layout-type.patch \
-        file://window_manager_h_fix_include.patch \
+        file://bo.patch \
 "
 
 
-do_configure_prepend() {
+do_configure:prepend() {
         cd ${S}
         # Force script incompatible with Python 3 to use /usr/bin/python2
         sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
@@ -36,7 +34,7 @@ do_configure_prepend() {
 }
 
 
-PACKAGECONFIG = "proprietary-codecs use-egl cups"
+PACKAGECONFIG = "proprietary-codecs use-egl cups gtk4"
 
 DEPENDS += "\
         libx11 \
@@ -51,32 +49,24 @@ DEPENDS += "\
         libxscrnsaver \
         libxshmfence \
         libxtst \
-        pipewire \
 "
 
-GN_ARGS_remove = "\
+GN_ARGS:remove = "\
         ozone_platform_x11=false \
-        use_system_libdrm=true \
-        use_system_minigbm=true \
         use_gtk=false \
 "
 
 GN_ARGS += "\
         enable_hangout_services_extension=true \
         enable_widevine=true \
-        link_pulseaudio=true \
         ozone_platform_x11=true \
-        ozone_platform_drm=true \
         ozone_platform_headless=true \
-        use_system_minigbm=false \
         enable_mdns=true \
         rtc_use_h264=true \
-        rtc_use_pipewire=true \
         arm_use_thumb=false \
         arm_use_neon=true \
         arm_optionally_use_neon=false \
         use_gtk=true \
-        use_gtk3=true \
         use_glib=true \
         use_v4l2_codec=true \
         use_v4lplugin=true \

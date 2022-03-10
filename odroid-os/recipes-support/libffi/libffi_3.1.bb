@@ -13,7 +13,7 @@ SRC_URI = "ftp://sourceware.org/pub/libffi/${BP}.tar.gz \
            file://fix-libffi.la-location.patch \
 	   "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI[md5sum] = "f5898b29bbfd70502831a212d9249d10"
 SRC_URI[sha256sum] = "97feeeadca5e21870fa4433bc953d1b3af3f698d5df8a428f68b73cd60aef6eb"
@@ -22,6 +22,6 @@ EXTRA_OECONF += "--disable-builddir"
 
 inherit autotools texinfo
 
-FILES_${PN}-dev += "${libdir}/libffi-${PV}"
+FILES:${PN}-dev += "${libdir}/libffi-${PV}"
 
 BBCLASSEXTEND = "native nativesdk"

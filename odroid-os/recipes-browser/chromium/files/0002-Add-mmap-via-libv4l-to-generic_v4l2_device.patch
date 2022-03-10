@@ -1,7 +1,7 @@
-From 97728e67ee78d126c36b5a002d861eea3d773582 Mon Sep 17 00:00:00 2001
+From f4d0420b18c9779f8e2f09c000e6e48c92edbda8 Mon Sep 17 00:00:00 2001
 From: Damian Hobson-Garcia <dhobsong@igel.co.jp>
 Date: Wed, 21 Mar 2018 13:18:17 +0200
-Subject: [PATCH 02/12] Add mmap via libv4l to generic_v4l2_device
+Subject: [PATCH 02/14] Add mmap via libv4l to generic_v4l2_device
 
 Issue #437
 ---
@@ -10,7 +10,7 @@ Issue #437
  2 files changed, 12 insertions(+)
 
 diff --git a/media/gpu/v4l2/generic_v4l2_device.cc b/media/gpu/v4l2/generic_v4l2_device.cc
-index a72d7a19..e4364f36 100644
+index 92ec1b60..b9da0b3c 100644
 --- a/media/gpu/v4l2/generic_v4l2_device.cc
 +++ b/media/gpu/v4l2/generic_v4l2_device.cc
 @@ -125,10 +125,20 @@ void* GenericV4L2Device::Mmap(void* addr,

@@ -1,7 +1,7 @@
-From dc6101261df8a4d6892c36ec3f26f70b8f98b0c3 Mon Sep 17 00:00:00 2001
+From 96e5f317bc2923f4bb8192ead3c67987314fc2f1 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 31 May 2021 01:29:11 +0800
-Subject: [PATCH 10/12] Create new fence when there's no in-fences
+Subject: [PATCH 10/14] Create new fence when there's no in-fences
 
 There're cases that in-fences are not provided.
 
@@ -11,12 +11,12 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  1 file changed, 19 insertions(+), 2 deletions(-)
 
 diff --git a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-index 81d1fddb..3b4fcc26 100644
+index 0f2eb6ec..b283e438 100644
 --- a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
 +++ b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-@@ -23,6 +23,12 @@
+@@ -30,6 +30,12 @@ static constexpr size_t kMaxSolidColorBuffers = 12;
  
- namespace {
+ static constexpr gfx::Size kSolidColorBufferSize{4, 4};
  
 +void WaitForEGLFence(EGLDisplay display, EGLSyncKHR fence) {
 +  eglClientWaitSyncKHR(display, fence, EGL_SYNC_FLUSH_COMMANDS_BIT_KHR,
@@ -27,7 +27,7 @@ index 81d1fddb..3b4fcc26 100644
  void WaitForGpuFences(std::vector<std::unique_ptr<gfx::GpuFence>> fences) {
    for (auto& fence : fences)
      fence->Wait();
-@@ -124,14 +130,25 @@
+@@ -211,14 +217,25 @@ void GbmSurfacelessWayland::SwapBuffersAsync(
      return;
    }
  
