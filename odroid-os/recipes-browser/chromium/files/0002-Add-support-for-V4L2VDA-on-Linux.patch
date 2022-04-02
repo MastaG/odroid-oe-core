@@ -1,7 +1,7 @@
-From 093ba11869de97c40942e6fc0366a514e8102ee2 Mon Sep 17 00:00:00 2001
+From 0ef905100e8e9a30c65c11f1e9da5d88a738ed43 Mon Sep 17 00:00:00 2001
 From: Maksim Sisov <msisov@igalia.com>
 Date: Wed, 31 Jul 2019 09:56:24 +0300
-Subject: [PATCH 01/14] Add support for V4L2VDA on Linux
+Subject: [PATCH 02/17] Add support for V4L2VDA on Linux
 
 This patch enables hardware assisted video decoding via the
 Chromium V4L2VDA. Including changes when Linux is used. In
@@ -52,7 +52,7 @@ index 3772b8ef..dece6b77 100644
  #endif
  
 diff --git a/media/gpu/BUILD.gn b/media/gpu/BUILD.gn
-index 98bf1fff..fed26fd4 100644
+index 30267d96..0c8f78de 100644
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
 @@ -20,6 +20,7 @@ buildflag_header("buildflags") {
@@ -64,7 +64,7 @@ index 98bf1fff..fed26fd4 100644
    ]
  }
 diff --git a/media/gpu/args.gni b/media/gpu/args.gni
-index 2f538439..bc47d2ad 100644
+index bb2ff079..da20cff7 100644
 --- a/media/gpu/args.gni
 +++ b/media/gpu/args.gni
 @@ -21,6 +21,10 @@ declare_args() {
@@ -151,7 +151,7 @@ index a80cac21..1021af34 100644
    std::unique_ptr<VideoDecodeAccelerator> CreateVTVDA(
        const gpu::GpuDriverBugWorkarounds& workarounds,
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 0322bbf7..3e637653 100644
+index 0322bbf7..abd85698 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
 @@ -28,9 +28,6 @@ source_set("v4l2") {
@@ -173,12 +173,16 @@ index 0322bbf7..3e637653 100644
      "v4l2_stateful_workaround.cc",
      "v4l2_stateful_workaround.h",
      "v4l2_status.h",
-@@ -50,30 +45,41 @@ source_set("v4l2") {
+@@ -48,32 +43,43 @@ source_set("v4l2") {
+     "v4l2_utils.h",
+     "v4l2_vda_helpers.cc",
      "v4l2_vda_helpers.h",
-     "v4l2_video_decode_accelerator.cc",
-     "v4l2_video_decode_accelerator.h",
--    "v4l2_video_decoder.cc",
--    "v4l2_video_decoder.h",
+-    "v4l2_video_decode_accelerator.cc",
+-    "v4l2_video_decode_accelerator.h",
+     "v4l2_video_decoder.cc",
+     "v4l2_video_decoder.h",
++    "v4l2_video_decode_accelerator.cc",
++    "v4l2_video_decode_accelerator.h",
      "v4l2_video_decoder_backend.cc",
      "v4l2_video_decoder_backend.h",
      "v4l2_video_decoder_backend_stateful.cc",
@@ -208,8 +212,6 @@ index 0322bbf7..3e637653 100644
 +      "v4l2_decode_surface_handler.h",
 +      "v4l2_slice_video_decode_accelerator.cc",
 +      "v4l2_slice_video_decode_accelerator.h",
-+      "v4l2_video_decoder.cc",
-+      "v4l2_video_decoder.h",
 +      "v4l2_video_decoder_backend_stateless.cc",
 +      "v4l2_video_decoder_backend_stateless.h",
 +      "v4l2_video_decoder_delegate_h264.cc",
@@ -428,10 +430,10 @@ index ee99d095..98a0d51f 100644
  
  absl::optional<V4L2RequestRef> V4L2RequestsQueue::GetFreeRequest() {
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index f3545a54..1b07bf79 100644
+index 7534052f..afde6b8e 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -23,7 +23,10 @@
+@@ -27,7 +27,10 @@
  #include "media/gpu/macros.h"
  #include "media/gpu/v4l2/v4l2_status.h"
  #include "media/gpu/v4l2/v4l2_video_decoder_backend_stateful.h"
@@ -442,7 +444,7 @@ index f3545a54..1b07bf79 100644
  
  namespace media {
  
-@@ -39,7 +42,9 @@ constexpr size_t kNumInputBuffers = 8;
+@@ -45,7 +48,9 @@ constexpr size_t kNumInputBuffers = 8;
  
  // Input format V4L2 fourccs this class supports.
  constexpr uint32_t kSupportedInputFourccs[] = {
@@ -452,7 +454,7 @@ index f3545a54..1b07bf79 100644
      V4L2_PIX_FMT_H264,       V4L2_PIX_FMT_VP8,       V4L2_PIX_FMT_VP9,
  };
  
-@@ -298,6 +303,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -317,6 +322,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
               << " and fourcc: " << FourccToString(input_format_fourcc);
      backend_ = std::make_unique<V4L2StatefulVideoDecoderBackend>(
          this, device_, profile_, decoder_task_runner_);
@@ -460,7 +462,7 @@ index f3545a54..1b07bf79 100644
    } else {
      DCHECK_EQ(preferred_api_and_format.first, kStateless);
      VLOGF(1) << "Using a stateless API for profile: "
-@@ -305,6 +311,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -324,6 +330,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
               << " and fourcc: " << FourccToString(input_format_fourcc);
      backend_ = std::make_unique<V4L2StatelessVideoDecoderBackend>(
          this, device_, profile_, decoder_task_runner_);
@@ -469,5 +471,5 @@ index f3545a54..1b07bf79 100644
  
    if (!backend_->Initialize()) {
 -- 
-2.20.1
+2.17.1
 

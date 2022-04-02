@@ -1,7 +1,7 @@
-From ec175e08ea2604f249aa01839a16e260d44d8a07 Mon Sep 17 00:00:00 2001
+From 66da7e7324bb0807cc956619e235b9b35f015180 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 31 May 2021 07:25:58 +0800
-Subject: [PATCH 12/14] HACK: media: capture: linux: Allow camera without
+Subject: [PATCH 13/17] HACK: media: capture: linux: Allow camera without
  supported format
 
 The chromium would only accept discrete frame sizes.
@@ -14,7 +14,7 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/media/capture/video/linux/video_capture_device_factory_linux.cc b/media/capture/video/linux/video_capture_device_factory_linux.cc
-index 9dfcabb2..af7f053d 100644
+index 4279ae8c..2f4a64d7 100644
 --- a/media/capture/video/linux/video_capture_device_factory_linux.cc
 +++ b/media/capture/video/linux/video_capture_device_factory_linux.cc
 @@ -192,10 +192,8 @@ void VideoCaptureDeviceFactoryLinux::GetDevicesInfo(
@@ -31,5 +31,5 @@ index 9dfcabb2..af7f053d 100644
        // HACK: Somehow the newest chromium would prefer using the last device in some cases, e.g. apprtc
        devices_info.emplace(devices_info.begin(), VideoCaptureDeviceDescriptor(
 -- 
-2.20.1
+2.17.1
 

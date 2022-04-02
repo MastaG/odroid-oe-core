@@ -1,0 +1,27 @@
+--- a/media/gpu/chromeos/BUILD.gn	2021-12-24 20:53:25.174577556 +0100
++++ b/media/gpu/chromeos/BUILD.gn	2021-12-24 20:55:26.751851079 +0100
+@@ -18,8 +18,12 @@
+   defines = [ "MEDIA_GPU_IMPLEMENTATION" ]
+   sources = [
+     "image_processor_factory.cc",
+-    "video_decoder_pipeline.cc",
+   ]
++  if (!use_linux_v4l2_only) {
++    sources += [
++      "video_decoder_pipeline.cc",
++    ]
++  }
+ 
+   public_deps = [ ":common" ]
+ 
+--- a/media/mojo/services/BUILD.gn	2021-12-24 20:56:59.519884715 +0100
++++ b/media/mojo/services/BUILD.gn	2021-12-24 20:58:11.984348706 +0100
+@@ -108,7 +108,7 @@
+     sources += [ "gpu_mojo_media_client_mac.cc" ]
+   } else if (is_win) {
+     sources += [ "gpu_mojo_media_client_win.cc" ]
+-  } else if (use_vaapi || use_v4l2_codec) {
++  } else if ((use_vaapi || use_v4l2_codec)  && !use_linux_v4l2_only) {
+     sources += [ "gpu_mojo_media_client_cros.cc" ]
+ 
+     if (is_chromeos) {
