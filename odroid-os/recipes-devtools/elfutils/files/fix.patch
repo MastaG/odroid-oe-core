@@ -1,0 +1,26 @@
+diff --git a/tests/show-die-info.c b/tests/show-die-info.c
+index 34e27a3b..1a3191cd 100644
+--- a/tests/show-die-info.c
++++ b/tests/show-die-info.c
+@@ -97,7 +97,7 @@ handle (Dwarf *dbg, Dwarf_Die *die, int n)
+   printf ("%*s Attrs     :", n * 5, "");
+   for (cnt = 0; cnt < 0xffff; ++cnt)
+     if (dwarf_hasattr (die, cnt))
+-      printf (" %s", dwarf_attr_string (cnt));
++      printf (" %s", dwarf_attr_string (cnt) ?: "<unknown>");
+   puts ("");
+ 
+   if (dwarf_hasattr (die, DW_AT_low_pc) && dwarf_lowpc (die, &addr) == 0)
+diff --git a/src/elflint.c b/src/elflint.c
+index 1ce75684..ef7725ce 100644
+--- a/src/elflint.c
++++ b/src/elflint.c
+@@ -4102,7 +4102,7 @@ section [%2zu] '%s' has type NOBITS but is read from the file in segment of prog
+ 			    bad = (databits == NULL
+ 				   || databits->d_size != shdr->sh_size);
+ 			    for (size_t idx = 0;
+-				 idx < databits->d_size && ! bad;
++				 ! bad && idx < databits->d_size;
+ 				 idx++)
+ 			      bad = ((char *) databits->d_buf)[idx] != 0;
+ 
