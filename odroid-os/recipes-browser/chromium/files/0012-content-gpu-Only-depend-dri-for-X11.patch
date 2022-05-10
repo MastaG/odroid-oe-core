@@ -1,7 +1,7 @@
-From b6dfd73fbf021a36ecc7bc334588dfb88ce8db43 Mon Sep 17 00:00:00 2001
+From 90517408a8d712aa5fdcea8434a82e45effd234f Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 22 Nov 2021 15:59:49 +0800
-Subject: [PATCH 14/17] content: gpu: Only depend dri for X11
+Subject: [PATCH 12/15] content: gpu: Only depend dri for X11
 
 Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/content/gpu/BUILD.gn b/content/gpu/BUILD.gn
-index bdf9b9d9..3c1bd014 100644
+index f0cc370d1..8b7ed3ec6 100644
 --- a/content/gpu/BUILD.gn
 +++ b/content/gpu/BUILD.gn
-@@ -127,7 +127,7 @@ target(link_target_type, "gpu_sources") {
+@@ -134,7 +134,7 @@ target(link_target_type, "gpu_sources") {
    }
  
    # Use DRI on desktop Linux builds.
@@ -22,5 +22,5 @@ index bdf9b9d9..3c1bd014 100644
      configs += [ "//build/config/linux/dri" ]
    }
 -- 
-2.17.1
+2.20.1
 

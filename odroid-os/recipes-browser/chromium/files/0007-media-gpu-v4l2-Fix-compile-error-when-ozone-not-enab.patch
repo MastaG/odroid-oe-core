@@ -1,7 +1,7 @@
-From 8b9a4232e72c16805e3845e472c4e1532647422f Mon Sep 17 00:00:00 2001
+From 15db811806b2c5a0450ce0a788f9228136957764 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 28 Sep 2020 20:02:00 +0800
-Subject: [PATCH 09/17] media: gpu: v4l2: Fix compile error when ozone not
+Subject: [PATCH 07/15] media: gpu: v4l2: Fix compile error when ozone not
  enabled
 
 Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
@@ -11,7 +11,7 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index abd85698..f20f18c3 100644
+index abd856983..f20f18c30 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
 @@ -108,9 +108,12 @@ source_set("v4l2") {
@@ -29,7 +29,7 @@ index abd85698..f20f18c3 100644
      deps += [ ":libv4l2_stubs" ]
    }
 diff --git a/media/gpu/v4l2/generic_v4l2_device.cc b/media/gpu/v4l2/generic_v4l2_device.cc
-index 64aa8c6d..11cf9c96 100644
+index 64aa8c6de..11cf9c967 100644
 --- a/media/gpu/v4l2/generic_v4l2_device.cc
 +++ b/media/gpu/v4l2/generic_v4l2_device.cc
 @@ -34,8 +34,11 @@
@@ -63,5 +63,5 @@ index 64aa8c6d..11cf9c96 100644
  
  EGLBoolean GenericV4L2Device::DestroyEGLImage(EGLDisplay egl_display,
 -- 
-2.17.1
+2.20.1
 

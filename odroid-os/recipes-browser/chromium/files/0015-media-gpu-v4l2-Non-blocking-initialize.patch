@@ -1,7 +1,7 @@
-From aaa752ff8f8fdf84e7323f19c5fb92facfa5e986 Mon Sep 17 00:00:00 2001
+From 2ddb7454bbda83d960524db23c586bd1505d62c6 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 21 Mar 2022 18:30:22 +0800
-Subject: [PATCH 17/17] media/gpu/v4l2: Non-blocking initialize
+Subject: [PATCH 15/15] media/gpu/v4l2: Non-blocking initialize
 
 See:
 https://bugs.chromium.org/p/chromium/issues/detail?id=1308345
@@ -13,7 +13,7 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  2 files changed, 17 insertions(+), 22 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_video_encode_accelerator.cc b/media/gpu/v4l2/v4l2_video_encode_accelerator.cc
-index 702fa0df..b7ba2e80 100644
+index 46ac323cf..75c4eebba 100644
 --- a/media/gpu/v4l2/v4l2_video_encode_accelerator.cc
 +++ b/media/gpu/v4l2/v4l2_video_encode_accelerator.cc
 @@ -261,25 +261,15 @@ bool V4L2VideoEncodeAccelerator::Initialize(const Config& config,
@@ -107,7 +107,7 @@ index 702fa0df..b7ba2e80 100644
  
  bool V4L2VideoEncodeAccelerator::CreateImageProcessor(
 diff --git a/media/gpu/v4l2/v4l2_video_encode_accelerator.h b/media/gpu/v4l2/v4l2_video_encode_accelerator.h
-index f5e104b6..f2b1cf91 100644
+index a8f0693c7..acb6ff418 100644
 --- a/media/gpu/v4l2/v4l2_video_encode_accelerator.h
 +++ b/media/gpu/v4l2/v4l2_video_encode_accelerator.h
 @@ -198,9 +198,7 @@ class MEDIA_GPU_EXPORT V4L2VideoEncodeAccelerator
@@ -122,5 +122,5 @@ index f5e104b6..f2b1cf91 100644
    // Set up formats and initialize the device for them.
    bool SetFormats(VideoPixelFormat input_format,
 -- 
-2.17.1
+2.20.1
 

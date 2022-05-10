@@ -1,0 +1,114 @@
+--- a/chrome/browser/ui/bookmarks/bookmark_tab_helper.cc
++++ b/chrome/browser/ui/bookmarks/bookmark_tab_helper.cc
+@@ -2,6 +2,7 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <cstddef>
+ #include "chrome/browser/ui/bookmarks/bookmark_tab_helper.h"
+ 
+ #include "base/observer_list.h"
+--- a/components/bookmarks/browser/base_bookmark_model_observer.cc
++++ b/components/bookmarks/browser/base_bookmark_model_observer.cc
+@@ -2,6 +2,8 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <cstddef>
++
+ #include "components/bookmarks/browser/base_bookmark_model_observer.h"
+ 
+ namespace bookmarks {
+--- a/components/bookmarks/browser/bookmark_expanded_state_tracker.cc
++++ b/components/bookmarks/browser/bookmark_expanded_state_tracker.cc
+@@ -2,6 +2,7 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <cstddef>
+ #include "components/bookmarks/browser/bookmark_expanded_state_tracker.h"
+ 
+ #include <stdint.h>
+--- a/third_party/angle/src/libANGLE/HandleAllocator.cpp
++++ b/third_party/angle/src/libANGLE/HandleAllocator.cpp
+@@ -9,6 +9,7 @@
+ 
+ #include "libANGLE/HandleAllocator.h"
+ 
++#include <limits>
+ #include <algorithm>
+ #include <functional>
+ 
+--- a/third_party/perfetto/src/trace_processor/containers/string_pool.cc
++++ b/third_party/perfetto/src/trace_processor/containers/string_pool.cc
+@@ -14,9 +14,9 @@
+  * limitations under the License.
+  */
+ 
++#include <limits>
+ #include "src/trace_processor/containers/string_pool.h"
+ 
+-#include <limits>
+ 
+ #include "perfetto/base/logging.h"
+ #include "perfetto/ext/base/utils.h"
+--- a/third_party/perfetto/src/trace_processor/db/column.cc
++++ b/third_party/perfetto/src/trace_processor/db/column.cc
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include <limits>
+ #include "src/trace_processor/db/column.h"
+ 
+ #include "src/trace_processor/db/compare.h"
+--- a/third_party/perfetto/src/trace_processor/types/variadic.cc
++++ b/third_party/perfetto/src/trace_processor/types/variadic.cc
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include <limits>
+ #include "src/trace_processor/types/variadic.h"
+ 
+ namespace perfetto {
+--- a/base/third_party/symbolize/symbolize.cc
++++ b/base/third_party/symbolize/symbolize.cc
+@@ -57,6 +57,7 @@
+ #if defined(HAVE_SYMBOLIZE)
+ 
+ #include <string.h>
++#include <utility>
+ 
+ #include <algorithm>
+ #include <limits>
+--- a/base/third_party/symbolize/symbolize.h
++++ b/base/third_party/symbolize/symbolize.h
+@@ -61,6 +61,7 @@
+ #ifdef HAVE_SYMBOLIZE
+ 
+ #include <algorithm>
++#include <utility>
+ 
+ #if defined(__ELF__)  // defined by gcc
+ #if defined(__OpenBSD__)
+--- a/net/base/address_list.h
++++ b/net/base/address_list.h
+@@ -10,6 +10,7 @@
+ #include <string>
+ #include <utility>
+ #include <vector>
++#include <tuple>
+ 
+ #include "base/compiler_specific.h"
+ #include "net/base/ip_endpoint.h"
+--- a/media/capabilities/webrtc_video_stats_db.h
++++ b/media/capabilities/webrtc_video_stats_db.h
+@@ -7,6 +7,7 @@
+ 
+ #include <memory>
+ #include <string>
++#include <vector>
+ 
+ #include "base/callback_forward.h"
+ #include "base/check.h"
