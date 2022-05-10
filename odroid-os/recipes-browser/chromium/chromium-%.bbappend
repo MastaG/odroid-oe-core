@@ -41,6 +41,8 @@ DEPENDS:remove = "\
         libxslt \
 "
 
+DEPENDS:append = " pipewire"
+
 GN_ARGS:remove = "\
         use_system_libjpeg=true \
 "
