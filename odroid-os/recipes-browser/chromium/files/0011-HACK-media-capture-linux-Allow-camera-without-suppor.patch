@@ -1,7 +1,7 @@
-From b425e9e17d27e479160c5c59ba99fca6fcfe9a3c Mon Sep 17 00:00:00 2001
+From 16230ae6d4789345a0e331de595996822cec0e08 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 31 May 2021 07:25:58 +0800
-Subject: [PATCH 11/15] HACK: media: capture: linux: Allow camera without
+Subject: [PATCH 11/14] HACK: media: capture: linux: Allow camera without
  supported format
 
 The chromium would only accept discrete frame sizes.

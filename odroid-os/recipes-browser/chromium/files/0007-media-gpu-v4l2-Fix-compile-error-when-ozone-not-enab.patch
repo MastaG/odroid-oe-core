@@ -1,7 +1,7 @@
-From 15db811806b2c5a0450ce0a788f9228136957764 Mon Sep 17 00:00:00 2001
+From 4b76e301fc197b2499d725c0ce950f11f0e2866d Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 28 Sep 2020 20:02:00 +0800
-Subject: [PATCH 07/15] media: gpu: v4l2: Fix compile error when ozone not
+Subject: [PATCH 07/14] media: gpu: v4l2: Fix compile error when ozone not
  enabled
 
 Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
@@ -11,10 +11,10 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index abd856983..f20f18c30 100644
+index 3a47d1166..800a42faa 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
-@@ -108,9 +108,12 @@ source_set("v4l2") {
+@@ -105,9 +105,12 @@ source_set("v4l2") {
      "//media/parsers",
      "//third_party/libyuv",
      "//ui/gfx/geometry",
@@ -29,10 +29,10 @@ index abd856983..f20f18c30 100644
      deps += [ ":libv4l2_stubs" ]
    }
 diff --git a/media/gpu/v4l2/generic_v4l2_device.cc b/media/gpu/v4l2/generic_v4l2_device.cc
-index 64aa8c6de..11cf9c967 100644
+index eb756a914..55901af1a 100644
 --- a/media/gpu/v4l2/generic_v4l2_device.cc
 +++ b/media/gpu/v4l2/generic_v4l2_device.cc
-@@ -34,8 +34,11 @@
+@@ -33,8 +33,11 @@
  #include "ui/gl/egl_util.h"
  #include "ui/gl/gl_bindings.h"
  #include "ui/gl/gl_image_native_pixmap.h"
@@ -44,7 +44,7 @@ index 64aa8c6de..11cf9c967 100644
  
  #if BUILDFLAG(USE_LIBV4L2)
  // Auto-generated for dlopen libv4l2 libraries
-@@ -303,6 +306,9 @@ scoped_refptr<gl::GLImage> GenericV4L2Device::CreateGLImage(
+@@ -302,6 +305,9 @@ scoped_refptr<gl::GLImage> GenericV4L2Device::CreateGLImage(
      const gfx::Size& size,
      const Fourcc fourcc,
      gfx::NativePixmapHandle handle) const {
@@ -54,7 +54,7 @@ index 64aa8c6de..11cf9c967 100644
    DVLOGF(3);
    DCHECK(CanCreateEGLImageFrom(fourcc));
  
-@@ -337,6 +343,7 @@ scoped_refptr<gl::GLImage> GenericV4L2Device::CreateGLImage(
+@@ -336,6 +342,7 @@ scoped_refptr<gl::GLImage> GenericV4L2Device::CreateGLImage(
    bool ret = image->Initialize(std::move(pixmap));
    DCHECK(ret);
    return image;

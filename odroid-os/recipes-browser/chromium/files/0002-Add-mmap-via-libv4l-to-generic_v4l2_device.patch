@@ -1,7 +1,7 @@
-From fca55707c3242d7e257850dbd6509c9e9ffc3736 Mon Sep 17 00:00:00 2001
+From c14f394663afbe51d973965d975fd9f1a0f8b105 Mon Sep 17 00:00:00 2001
 From: Damian Hobson-Garcia <dhobsong@igel.co.jp>
 Date: Wed, 21 Mar 2018 13:18:17 +0200
-Subject: [PATCH 02/15] Add mmap via libv4l to generic_v4l2_device
+Subject: [PATCH 02/14] Add mmap via libv4l to generic_v4l2_device
 
 Issue #437
 ---
@@ -10,10 +10,10 @@ Issue #437
  2 files changed, 12 insertions(+)
 
 diff --git a/media/gpu/v4l2/generic_v4l2_device.cc b/media/gpu/v4l2/generic_v4l2_device.cc
-index 92ec1b607..b9da0b3cd 100644
+index becf30c9c..a3fe307c8 100644
 --- a/media/gpu/v4l2/generic_v4l2_device.cc
 +++ b/media/gpu/v4l2/generic_v4l2_device.cc
-@@ -125,10 +125,20 @@ void* GenericV4L2Device::Mmap(void* addr,
+@@ -124,10 +124,20 @@ void* GenericV4L2Device::Mmap(void* addr,
                                int flags,
                                unsigned int offset) {
    DCHECK(device_fd_.is_valid());

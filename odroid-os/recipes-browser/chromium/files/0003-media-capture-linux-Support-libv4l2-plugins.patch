@@ -1,7 +1,7 @@
-From ff57d463710996e0c84feca9ca0520b7bc2505bb Mon Sep 17 00:00:00 2001
+From c6242784b74945b89bbe35395f3c7ca766218977 Mon Sep 17 00:00:00 2001
 From: Jeffy Chen <jeffy.chen@rock-chips.com>
 Date: Mon, 1 Jul 2019 10:37:35 +0800
-Subject: [PATCH 03/15] media: capture: linux: Support libv4l2 plugins
+Subject: [PATCH 03/14] media: capture: linux: Support libv4l2 plugins
 
 Allow using libv4l2 plugins for linux v4l2 capture devices.
 
@@ -13,7 +13,7 @@ Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
  3 files changed, 76 insertions(+), 1 deletion(-)
 
 diff --git a/media/capture/BUILD.gn b/media/capture/BUILD.gn
-index a1170459b..d6ef4d977 100644
+index 3f80b62cb..3c6559339 100644
 --- a/media/capture/BUILD.gn
 +++ b/media/capture/BUILD.gn
 @@ -2,6 +2,7 @@
