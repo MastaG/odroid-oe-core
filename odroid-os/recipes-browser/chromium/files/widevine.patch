@@ -1,7 +1,6 @@
-diff -Naur a/chrome/common/chrome_paths.cc b/chrome/common/chrome_paths.cc
---- a/chrome/common/chrome_paths.cc	2022-04-20 21:09:15.000000000 +0200
-+++ b/chrome/common/chrome_paths.cc	2022-05-09 15:16:17.355711952 +0200
-@@ -323,6 +323,15 @@
+--- a/chrome/common/chrome_paths.cc   2024-11-02 05:34:51.532944000 +0100
++++ b/chrome/common/chrome_paths.cc        2024-11-06 12:09:53.491750002 +0100
+@@ -410,6 +410,15 @@
  
  #if BUILDFLAG(ENABLE_WIDEVINE)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:
@@ -14,12 +13,11 @@ diff -Naur a/chrome/common/chrome_paths.cc b/chrome/common/chrome_paths.cc
 +      cur = cur.Append(kWidevineCdmBaseDirectory);
 +      if (base::PathExists(cur))
 +        break;
-       if (!GetComponentDirectory(&cur))
+       if (!GetComponentDirectory(&cur)) {
          return false;
-       cur = cur.AppendASCII(kWidevineCdmBaseDirectory);
-diff -Naur a/third_party/widevine/cdm/widevine_cdm_version.h b/third_party/widevine/cdm/widevine_cdm_version.h
---- a/third_party/widevine/cdm/widevine_cdm_version.h	2022-04-20 21:09:49.000000000 +0200
-+++ b/third_party/widevine/cdm/widevine_cdm_version.h	2022-05-09 15:16:17.356711971 +0200
+       }
+--- a/third_party/widevine/cdm/widevine_cdm_version.h 2024-11-02 05:36:10.626941700 +0100
++++ b/third_party/widevine/cdm/widevine_cdm_version.h      2024-11-06 12:07:38.851160668 +0100
 @@ -11,5 +11,6 @@
  // If the Widevine CDM is available define the following:
  //  - WIDEVINE_CDM_VERSION_STRING (with the version of the CDM that's available
@@ -27,24 +25,23 @@ diff -Naur a/third_party/widevine/cdm/widevine_cdm_version.h b/third_party/widev
 +#define WIDEVINE_CDM_VERSION_STRING "undefined"
  
  #endif  // WIDEVINE_CDM_VERSION_H_
-diff -Naur a/third_party/widevine/cdm/widevine.gni b/third_party/widevine/cdm/widevine.gni
---- a/third_party/widevine/cdm/widevine.gni	2022-04-20 21:09:49.000000000 +0200
-+++ b/third_party/widevine/cdm/widevine.gni	2022-05-09 15:19:16.586073354 +0200
-@@ -26,7 +26,7 @@
+--- a/third_party/widevine/cdm/widevine.gni   2024-11-02 05:36:10.626941700 +0100
++++ b/third_party/widevine/cdm/widevine.gni        2024-11-06 12:11:24.304470026 +0100
+@@ -27,7 +27,7 @@
  library_widevine_cdm_available =
      (is_chromeos &&
       (target_cpu == "x64" || target_cpu == "arm" || target_cpu == "arm64")) ||
 -    (target_os == "linux" && target_cpu == "x64") ||
 +    (target_os == "linux" && (target_cpu == "x64" || target_cpu == "arm" || target_cpu == "arm64")) ||
      (target_os == "mac" && (target_cpu == "x64" || target_cpu == "arm64")) ||
-     (target_os == "win" && (target_cpu == "x86" || target_cpu == "x64"))
- 
-@@ -42,7 +42,7 @@
- # Note: Not enabled on ChromeOS. See https://crbug.com/971433
+     (target_os == "win" &&
+      (target_cpu == "x86" || target_cpu == "x64" || target_cpu == "arm64"))
+@@ -44,7 +44,7 @@
+ # component. See below.
  enable_widevine_cdm_component =
      enable_library_widevine_cdm &&
--    (is_win || is_mac || is_linux || is_chromeos_lacros)
-+    (is_win || is_mac || is_linux || is_chromeos_lacros || is_chromeos)
+-    (is_win || is_mac || is_linux || is_chromeos_ash)
++    (is_win || is_mac || is_linux || is_chromeos_ash || is_chromeos)
  
  # Enable (Windows) Media Foundation Widevine CDM component.
  declare_args() {

@@ -1,0 +1,11 @@
+--- a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc    2024-11-08 16:10:21.678274282 +0100
++++ b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc    2024-11-08 16:12:03.583093122 +0100
+@@ -443,7 +443,7 @@
+     const struct timeval timeval = buffer->GetTimeStamp();
+     const struct timespec timespec = {
+         .tv_sec = timeval.tv_sec,
+-        .tv_nsec = timeval.tv_usec * 1000,
++        .tv_nsec = static_cast<long>(timeval.tv_usec * 1000),
+     };
+ 
+     const int64_t flat_timespec =

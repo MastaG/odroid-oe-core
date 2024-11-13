@@ -1,1 +1,1 @@
-DEPENDS:append = " libxshmfence"
+DEPENDS:append = " libxshmfence libxkbcommon"

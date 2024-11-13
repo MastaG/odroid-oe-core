@@ -56,10 +56,8 @@ BBLAYERS ?= \
 	$(CURDIR)/odroid-os \
 	$(CURDIR)/meta-odroid \
 	$(CURDIR)/meta-browser/meta-chromium \
-	$(CURDIR)/meta-local \
-	$(CURDIR)/meta-qt5 \
-	$(CURDIR)/meta-selinux \
 	$(CURDIR)/meta-clang \
+	$(CURDIR)/meta-selinux \
 
 CONFFILES = \
 	$(TOPDIR)/env.source \
@@ -145,6 +143,7 @@ $(TOPDIR)/env.source: $(DEPDIR)/.env.source.$(BITBAKE_ENV_HASH)
 	@echo 'export BB_ENV_PASSTHROUGH_ADDITIONS="MACHINE"' > $@
 	@echo 'export MACHINE' >> $@
 	@echo 'export PATH=$(CURDIR)/openembedded-core/scripts:$(CURDIR)/bitbake/bin:$${PATH}' >> $@
+	@echo 'export BBPATH=$(CURDIR)/build' >> $@
 
 ODROIDOS_CONF_HASH := $(call hash, \
 	'ODROIDOS_SCONF_VERSION = "1"' \

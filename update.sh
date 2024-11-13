@@ -1,6 +1,6 @@
 #!/bin/bash
 git pull
-for i in bitbake meta-clang meta-odroid meta-openembedded meta-qt5 meta-selinux openembedded-core meta-browser
+for i in bitbake meta-clang meta-odroid meta-openembedded openembedded-core meta-browser meta-selinux
 do
 	echo "Updating ${i}"
 	cd ${i}

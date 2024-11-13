@@ -4,21 +4,18 @@
 [submodule "bitbake"]
 	path = bitbake
 	url = https://github.com/openembedded/bitbake.git
-[submodule "meta-qt5"]
-	path = meta-qt5
-	url = https://github.com/meta-qt5/meta-qt5.git
 [submodule "meta-openembedded"]
 	path = meta-openembedded
 	url = https://github.com/openembedded/meta-openembedded.git
 [submodule "meta-clang"]
 	path = meta-clang
 	url = https://github.com/kraj/meta-clang.git
-[submodule "meta-selinux"]
-	path = meta-selinux
-	url = git://git.yoctoproject.org/meta-selinux
 [submodule "meta-odroid"]
 	path = meta-odroid
 	url = https://github.com/akuster/meta-odroid.git
 [submodule "meta-browser"]
 	path = meta-browser
 	url = https://github.com/OSSystems/meta-browser.git
+[submodule "meta-selinux"]
+	path = meta-selinux
+	url = git://git.yoctoproject.org/meta-selinux
