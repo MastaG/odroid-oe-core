@@ -23,7 +23,6 @@ SRC_URI:append = "\
         file://use-oauth2-client-switches-as-default.patch \
         file://widevine.patch \
         file://misc-fixes.patch \
-        file://unbundle-add-enable_freetype.patch \
 "
 
 # file://arm_neon.patch
@@ -41,7 +40,6 @@ DEPENDS:remove = "\
 
 GN_ARGS:remove = "\
         use_system_libjpeg=true \
-        use_system_freetype=false \
 "
 
 GN_ARGS:append = "\
@@ -54,6 +52,7 @@ GN_ARGS:append = "\
         link_pulseaudio=true \
         blink_enable_generated_code_formatting=false \
         blink_symbol_level=0 \
+        use_gtk=true \
 "
 
 CFLAGS:remove:arm = "-g"
