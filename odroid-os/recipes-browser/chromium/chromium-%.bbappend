@@ -8,7 +8,6 @@ SRC_URI:append = "\
         file://0003-media-gpu-v4l2-Gen-libv4l2_stubs.patch \
         file://0004-media-gpu-v4l2-Support-libv4l2-plugins.patch \
         file://0005-media-capture-linux-Support-libv4l2-plugins.patch \
-        file://0006-cld3-Avoid-unaligned-accesses.patch \
         file://0007-media-gpu-v4l2-Use-POLLIN-for-pending-event.patch \
         file://0008-media-capture-linux-Prefer-using-the-first-device.patch \
         file://0009-media-gpu-v4l2-Fix-compile-error-when-ozone-not-enab.patch \
@@ -26,9 +25,10 @@ SRC_URI:append = "\
 "
 
 # file://arm_neon.patch
+# file://0006-cld3-Avoid-unaligned-accesses.patch
 
 PACKAGECONFIG[use-linux-v4l2] = "use_v4l2_codec=true use_v4lplugin=true use_linux_v4l2_only=true"
-PACKAGECONFIG = "proprietary-codecs use-egl cups use-linux-v4l2 custom-libcxx"
+PACKAGECONFIG = "proprietary-codecs use-egl cups use-linux-v4l2 gtk4"
 
 DEPENDS:append = " pipewire"
 
@@ -65,10 +65,12 @@ do_configure:prepend() {
         cd ${S}
         # Allow building against system libraries in official builds
         sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
-        sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' -e '1i #include <cstdlib>' third_party/blink/renderer/core/xml/*.cc third_party/blink/renderer/core/xml/parser/xml_document_parser.cc third_party/libxml/chromium/*.cc
+        # sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' -e '1i #include <cstdlib>' third_party/blink/renderer/core/xml/*.cc third_party/blink/renderer/core/xml/parser/xml_document_parser.cc third_party/libxml/chromium/*.cc
 
 }
 
-CHROMIUM_EXTRA_ARGS:append = " --no-sandbox --gpu-sandbox-start-early --ignore-gpu-blocklist --enable-accelerated-video-decode"
+CHROMIUM_EXTRA_ARGS:append = " --ignore-gpu-blocklist --ignore-gpu-blacklist --enable-accelerated-video-decode"
 # --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 CHROMIUM_EXTRA_ARGS:append = " --enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+# Remove when 131 is out
+CHROMIUM_EXTRA_ARGS:append = " --disable-gpu-memory-buffer-video-frames"
