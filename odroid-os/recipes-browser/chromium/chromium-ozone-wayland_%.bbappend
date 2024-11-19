@@ -1,6 +1,5 @@
 GN_ARGS:remove = "\
         ozone_platform_x11=false \
-        use_gtk=false \
 "
 
 GN_ARGS += "\

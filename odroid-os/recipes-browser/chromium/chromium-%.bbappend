@@ -19,6 +19,7 @@ SRC_URI:append = "\
         file://0015-ui-gfx-linux-Force-disabling-modifiers.patch \
         file://0016-HACK-ui-x11-Fix-config-choosing-error-with-Mali-DDK.patch \
         file://0017-Run-blink-bindings-generation-single-threaded.patch \
+        file://0018-ozone-wayland-Check-format-supported-by-gbm-for-crea.patch \
         file://use-oauth2-client-switches-as-default.patch \
         file://widevine.patch \
         file://misc-fixes.patch \
@@ -49,10 +50,8 @@ GN_ARGS:append = "\
         arm_use_neon=true \
         rtc_use_pipewire=true \
         fatal_linker_warnings=false \
-        link_pulseaudio=true \
         blink_enable_generated_code_formatting=false \
         blink_symbol_level=0 \
-        use_gtk=true \
 "
 
 CFLAGS:remove:arm = "-g"
@@ -65,12 +64,10 @@ do_configure:prepend() {
         cd ${S}
         # Allow building against system libraries in official builds
         sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
-        # sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' -e '1i #include <cstdlib>' third_party/blink/renderer/core/xml/*.cc third_party/blink/renderer/core/xml/parser/xml_document_parser.cc third_party/libxml/chromium/*.cc
+        sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' -e '1i #include <cstdlib>' third_party/blink/renderer/core/xml/*.cc third_party/blink/renderer/core/xml/parser/xml_document_parser.cc third_party/libxml/chromium/*.cc
 
 }
 
 CHROMIUM_EXTRA_ARGS:append = " --ignore-gpu-blocklist --ignore-gpu-blacklist --enable-accelerated-video-decode"
 # --enable-native-gpu-memory-buffers --enable-zero-copy --num-raster-threads=4 --audio-buffer-size=4096"
 CHROMIUM_EXTRA_ARGS:append = " --enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
-# Remove when 131 is out
-CHROMIUM_EXTRA_ARGS:append = " --disable-gpu-memory-buffer-video-frames"
