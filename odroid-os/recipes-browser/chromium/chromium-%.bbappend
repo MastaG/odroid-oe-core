@@ -52,13 +52,14 @@ GN_ARGS:append = "\
         fatal_linker_warnings=false \
         blink_enable_generated_code_formatting=false \
         blink_symbol_level=0 \
+        use_gtk=false \
 "
 
 CFLAGS:remove:arm = "-g"
 CXXFLAGS:remove:arm = "-g"
 
 CHROMIUM_EXTRA_ARGS:remove = "--use-gl=egl"
-CHROMIUM_EXTRA_ARGS:append = " --use-gl=angle --use-angle=gles-egl --use-cmd-decoder=passthrough"
+CHROMIUM_EXTRA_ARGS:append = " --use-angle=gles-egl --use-cmd-decoder=passthrough --enable-zero-copy"
 
 do_configure:prepend() {
         cd ${S}
